@@ -8,3 +8,7 @@
 ## repo
     - 仓库 
     - create a repo
+# git 配置
+    github,gitee 身份
+- git config --global user.name "dwk-lzd"
+- git config --global user.email "2920399114@qq.com"
