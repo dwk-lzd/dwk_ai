@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3B30',
+                        secondary: '#FF8A80'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50">
+    <div class="w-[375px] min-h-[762px] mx-auto relative bg-white">
+        <nav class="fixed top-0 w-[375px] h-[44px] bg-primary flex items-center justify-between px-4 z-50">
+            <div class="font-['Pacifico'] text-white text-xl">logo</div>
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-search text-white text-lg w-[20px] h-[20px] flex items-center justify-center"></i>
+                <i class="fas fa-bell text-white text-lg w-[20px] h-[20px] flex items-center justify-center"></i>
+            </div>
+        </nav>
+
+        <main class="pt-[44px] pb-[60px]">
+            <div class="px-4 py-3">
+                <div class="relative">
+                    <input type="text" placeholder="搜索商品"
+                        class="w-full h-[36px] bg-gray-100 rounded-full pl-10 pr-4 text-sm focus:outline-none border-none">
+                    <i class="fas fa-search absolute left-4 top-[10px] text-gray-400"></i>
+                </div>
+            </div>
+            <div class="w-full h-[160px] relative overflow-hidden">
+                <img src="https://ai-public.mastergo.com/ai/img_res/bfb03c30abaac7d8289c2158a1f97983.jpg"
+                    class="w-full h-full object-cover" alt="banner">
+            </div>
+
+            <div class="grid grid-cols-5 gap-4 px-4 py-6">
+                <div class="flex flex-col items-center">
+                    <div class="w-[48px] h-[48px] rounded-lg overflow-hidden mb-2">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/d9aa03d556377d5d8d74156eb9cfdea3.jpg"
+                            class="w-full h-full object-cover" alt="服装">
+                    </div>
+                    <span class="text-xs text-gray-600 whitespace-nowrap">服装</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-[48px] h-[48px] rounded-lg overflow-hidden mb-2">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/0d8e28006e0ce822fc06c7d2105a78a3.jpg"
+                            class="w-full h-full object-cover" alt="数码">
+                    </div>
+                    <span class="text-xs text-gray-600 whitespace-nowrap">数码</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-[48px] h-[48px] rounded-lg overflow-hidden mb-2">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/32a45692bb0122faada2a2627a7f09bb.jpg"
+                            class="w-full h-full object-cover" alt="美妆">
+                    </div>
+                    <span class="text-xs text-gray-600 whitespace-nowrap">美妆</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-[48px] h-[48px] rounded-lg overflow-hidden mb-2">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/2056498eec7e721fb061fe7e7810d612.jpg"
+                            class="w-full h-full object-cover" alt="美食">
+                    </div>
+                    <span class="text-xs text-gray-600 whitespace-nowrap">美食</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-[48px] h-[48px] rounded-lg overflow-hidden mb-2">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/ca130f2bcf345f0d3303a7c4adaf416f.jpg"
+                            class="w-full h-full object-cover" alt="礼品">
+                    </div>
+                    <span class="text-xs text-gray-600 whitespace-nowrap">礼品</span>
+                </div>
+            </div>
+
+            <div class="px-4">
+                <h2 class="text-lg font-medium mb-4">热门商品</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="w-full h-[160px] overflow-hidden">
+                            <img src="https://ai-public.mastergo.com/ai/img_res/8991f6bab9c456b37c018b493c6dc4ce.jpg"
+                                class="w-full h-full object-cover" alt="商品">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium mb-1">时尚连衣裙</h3>
+                            <p class="text-xs text-gray-500 mb-2">优雅气质 修身显瘦</p>
+                            <div class="text-primary font-medium">¥ 299</div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="w-full h-[160px] overflow-hidden">
+                            <img src="https://ai-public.mastergo.com/ai/img_res/16c024e559bdec581105f5b45b25874e.jpg"
+                                class="w-full h-full object-cover" alt="商品">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium mb-1">运动休闲鞋</h3>
+                            <p class="text-xs text-gray-500 mb-2">舒适百搭 轻便透气</p>
+                            <div class="text-primary font-medium">¥ 399</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav
+            class="fixed bottom-0 w-[375px] h-[60px] bg-white border-t border-gray-100 flex items-center justify-between px-6 z-50">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-home text-primary text-lg w-[24px] h-[24px] flex items-center justify-center"></i>
+                <span class="text-xs text-primary mt-1">首页</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-play text-gray-400 text-lg w-[24px] h-[24px] flex items-center justify-center"></i>
+                <span class="text-xs text-gray-400 mt-1">视频</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-comment text-gray-400 text-lg w-[24px] h-[24px] flex items-center justify-center"></i>
+                <span class="text-xs text-gray-400 mt-1">消息</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i
+                    class="fas fa-shopping-bag text-gray-400 text-lg w-[24px] h-[24px] flex items-center justify-center"></i>
+                <span class="text-xs text-gray-400 mt-1">购物</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg w-[24px] h-[24px] flex items-center justify-center"></i>
+                <span class="text-xs text-gray-400 mt-1">我的</span>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>
