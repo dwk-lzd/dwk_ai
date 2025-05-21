@@ -12,3 +12,5 @@
     github,gitee 身份
 - git config --global user.name "dwk-lzd"
 - git config --global user.email "2920399114@qq.com"
+
+- new.txt
