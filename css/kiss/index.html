@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        /* 给小球添加一个浪漫的粉色背景舞台 */
         body {
             background-color: pink;
             margin: 0;
 
         }
 
+        /* 给大盒子添加属性 */
         .container {
             position: absolute;
             top: 50%;
@@ -19,6 +21,8 @@
             width: 238px;
             /* height: 238px; */
             /* background-color: blue; */
+
+            /* 与top 50%，left %50 共同完成了是其达到舞台中央 */
             transform: translate(-50%, -50%);
         }
 
@@ -41,6 +45,7 @@
             right: 0;
             top: 30px;
             border-top-right-radius: 15px;
+            /* 背景颜色大法 */
             /* background-color: green; */
 
         }
@@ -85,17 +90,24 @@
 </head>
 
 <body>
+    <!-- 包裹两个小球的大盒子 -->
     <div class="container">
+        <!-- 左球 -->
         <div id="l-ball" class="ball">
+            <!-- 左球脸 -->
             <div class="face face-l">
+                <!-- 眼睛，嘴巴 -->
                 <div class="eye eye-l"></div>
                 <div class="eye eye-r"></div>
                 <div class="mouth"></div>
             </div>
         </div>
 
+        <!-- 右球 -->
         <div id="r-ball" class="ball">
+            <!-- 右球脸 -->
             <div class="face face-r">
+                <!-- 眼睛，嘴巴 -->
                 <div class="eye eye-l eye-r-p"></div>
                 <div class="eye eye-r eye-r-p"></div>
                 <div class="mouth mouth-r"></div>
