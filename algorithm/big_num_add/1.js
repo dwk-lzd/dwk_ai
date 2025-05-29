@@ -13,7 +13,7 @@ function addLargeNumbers(num1, num2) {
     while (i >= 0 || j >= 0 || carry > 0) {
         // 边界,parseInt 会把字符串转换成数字
         const digit1 = i >= 0 ? parseInt(num1[i]) : 0
-        const digit2 = i >= 0 ? parseInt(num1[j]) : 0
+        const digit2 = j >= 0 ? parseInt(num2[j]) : 0
         const sum = digit1 + digit2 + carry // 计算当前位的和
         result = (sum % 10) + result // 将当前位的和添加到结果字符串的前面
         carry = Math.floor(sum / 10) // 计算进位
