@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* 弹性布局 pad 手机 尺寸不同 布局 flex */
+    display: flex;
+    /* 垂直方向居中 */
+    align-items: center;
+    /* 水平方向居中 */
+    justify-content: center;
+    /* 相对单位  view height 一屏高度100vh,等比例划分，一屏全部沾满*/
+    height: 100vh;
+    /* 超出隐藏 */
+    overflow: hidden;
+}
+
+.container {
+    /* 弹性布局 格式化上下文 */
+    display: flex;
+    /* 90% view width 视口宽度 */
+    width: 90vw;
+}
+
+.qq-panel {
+    height: 80vh;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+    flex: 0.5;
+    /* 过度效果 元素样式改变后 all代表某一个样式改变 700ms表示时间 ease-in 表示一个变换的速度 */
+    transition: all 700ms ease-in;
+}
+
+.qq-panel__title {
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    opacity: 0;
+}
+
+.qq-panel--active {
+    flex: 5;
+}
+
+.qq-panel--active .qq-panel__title {
+    opacity: 1;
+    /* 从不可见到可见花了0.3秒 在0.4秒钟慢慢出现 */
+    /* transition: all 700ms ease-in;我们上面展开时间用了0.7秒 */
+    transition: opacity 0.3s ease-in 0.4s;
+}
