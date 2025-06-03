@@ -24,7 +24,7 @@ const user = {
 
 }
 // user.age=18
-// console.log(user.name, user[ID], user.age, user[age]);
+console.log(user.name, user[ID], user.age, user[age]); // Alice 123 2 18  是可以通过显示访问到的，
 // 面向对象私有属性概念？
 // 对象的隐私，内部需要，不希望外界调用
 for (let key in user) {
