@@ -27,7 +27,7 @@ const user = {
 // console.log(user.name, user[ID], user.age, user[age]);
 // 面向对象私有属性概念？
 // 对象的隐私，内部需要，不希望外界调用
-for (let key of user) {
+for (let key in user) {
     // 遍历对象
-    console.log(user.key, user[key], '--------');
+    console.log(key, user[key], '--------');
 }
