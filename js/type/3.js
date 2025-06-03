@@ -29,5 +29,6 @@ const user = {
 // 对象的隐私，内部需要，不希望外界调用
 for (let key in user) {
     // 遍历对象
-    console.log(key, user[key], '--------');
+    console.log(key, user[key], '--------');// name Alice --------    age 2 --------   并不会输出[age]: 18 和 [ID]: 123  // 对象的隐私，内部需要，不希望外界调用
+
 }
