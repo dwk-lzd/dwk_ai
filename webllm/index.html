@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络热梗生成器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🍉 今日网络热梗生成器</h1>
+        <div class="controls">
+            <select id="category">
+                <option value="all">全部类型</option>
+                <option value="melon">吃瓜事件</option>
+                <option value="meme">网络名梗</option>
+                <option value="golden">金句合集</option>
+            </select>
+            <button onclick="generateContent()">生成今日热梗</button>
+        </div>
+        <div id="output" class="content-box"></div>
+        <button onclick="copyToClipboard()" class="copy-btn">一键复制</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
