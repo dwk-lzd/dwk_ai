@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 异步任务
+        // fetch 网络请求  then
+        // es6 的promise 异步变同步的解决方案 
+        // promise 实例化时需要参数的 传入一个函数，并且函数会立即执行
+        const p = new Promise((resolve) => { // new 的过程 是一个同步任务
+            console.log('3333'); // 立即执行
+
+            setTimeout(() => { // 定时器的注册 
+                console.log('2222');
+                resolve()
+            }, 10)
+        })
+        // Promise 实例 prototype 上有then 方法 
+
+        // console.log(p);
+        p.then(() => {
+            console.log('1111');
+        })
+        // 如何设计一个then 就可以让同步任务在异步任务之后执行
+
+
+    </script>
+</body>
+
+</html>
