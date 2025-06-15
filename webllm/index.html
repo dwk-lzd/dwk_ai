@@ -4,25 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网络热梗生成器</title>
+    <title>🍉 智能网络热梗生成器</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-        <h1>🍉 今日网络热梗生成器</h1>
-        <div class="controls">
-            <select id="category">
-                <option value="all">全部类型</option>
-                <option value="melon">吃瓜事件</option>
-                <option value="meme">网络名梗</option>
-                <option value="golden">金句合集</option>
-            </select>
-            <button onclick="generateContent()">生成今日热梗</button>
+        <header class="header">
+            <h1><i class="fas fa-fire"></i> 智能网络热梗生成器</h1>
+            <p class="subtitle">发现最新网络热梗，AI实时解读</p>
+        </header>
+
+        <div class="main-content">
+            <div class="controls-section">
+                <div class="control-group">
+                    <label for="category"><i class="fas fa-tags"></i> 选择类型</label>
+                    <select id="category">
+                        <option value="all">🌟 全部类型</option>
+                        <option value="melon">🍉 吃瓜事件</option>
+                        <option value="meme">😂 网络名梗</option>
+                        <option value="golden">💎 金句合集</option>
+                    </select>
+                </div>
+                <button onclick="generateContent()" class="generate-btn">
+                    <i class="fas fa-magic"></i> 生成今日热梗
+                </button>
+            </div>
+
+            <div id="output" class="content-box">
+                <div class="placeholder">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>点击按钮生成今日最热网络梗！</p>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="copyToClipboard()" class="action-btn copy-btn">
+                    <i class="fas fa-copy"></i> 一键复制
+                </button>
+                <button onclick="shareContent()" class="action-btn share-btn">
+                    <i class="fas fa-share-alt"></i> 分享内容
+                </button>
+            </div>
         </div>
-        <div id="output" class="content-box"></div>
-        <button onclick="copyToClipboard()" class="copy-btn">一键复制</button>
+
+        <!-- AI对话区域 -->
+        <div id="aiChatModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-robot"></i> DeepSeek AI 解读</h3>
+                    <div class="modal-controls">
+                        <button id="stopBtn" class="stop-btn" onclick="stopQuery()">
+                            <i class="fas fa-stop"></i> 停止
+                        </button>
+                        <button class="close-btn" onclick="closeModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="queryText" class="query-text"></div>
+                    <div id="aiResponse" class="ai-response">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="copyAIResponse()" class="action-btn">
+                        <i class="fas fa-copy"></i> 复制回复
+                    </button>
+                    <button onclick="shareAIResponse()" class="action-btn">
+                        <i class="fas fa-share-alt"></i> 分享解读
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 历史记录 -->
+        <div class="history-section">
+            <h3><i class="fas fa-history"></i> 查询历史</h3>
+            <div id="historyList" class="history-list">
+                <div class="history-placeholder">
+                    <i class="fas fa-clock"></i>
+                    <p>暂无查询历史</p>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 
