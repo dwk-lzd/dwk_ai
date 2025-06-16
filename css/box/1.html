@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒模型</title>
+    <style>
+        /* css reset */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            /* bory 分配一个高度，才能把像水平方向上一样，设置flex:1;会沾满 */
+            height: 100vh;
+        }
+
+        .box {
+            /* display 可以去切换盒子的能力 
+                box-sizing 可以去设定盒子的
+                计算方案
+                默认值是 content-box 宽度和高度 指定的是 内容的大小 标准盒模型
+                border-box 宽度和高度 包含了border以内的大小 怪异（IE）盒模型
+            */
+            box-sizing: content-box;
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 10px;
+            padding: 5px;
+            border: 2px solid yellow;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        main {
+            /* 会撑大 占据剩余的 */
+            flex: 1;
+            position: relative;
+        }
+
+        .inner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            border-radius: 50%;
+            /* 脱离文档流 */
+        }
+
+        .continer {
+            flex: 1;
+            overflow: scroll;
+        }
+
+        header,
+        footer {
+            height: 44px;
+            background-color: grey;
+            text-align: center;
+        }
+
+        footer {
+            /* 实现p标签里面的文字居中 */
+            /* 相当于开启了新的格式化上下文，不会受外界影响 */
+            display: flex;
+            /* 对于里面的子元素生效，两者结合实现居中 */
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .more {
+            /* 相对于body定位 */
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            /* 相对于body居中 */
+            top: 50%;
+            left: 50%;
+            /* transform: translate(-50%, -50%); */
+
+            /* 需要知道盒子具体大小 */
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>盒模型</h1>
+    </header>
+    <div class="continer">
+        <div class="row flex">
+            <aside class="box"></aside>
+            <main class="box">
+                <!-- z-index 只和自己的兄弟元素生效 -->
+                <div class="inner" style="z-index: 999;"></div>
+                <div style="position: absolute; width: 100px;height: 100px;background-color: yellow;"></div>
+                <div style=" width: 100px;height: 100px;background-color: yellow;"></div>
+            </main>
+            <aside class="box"></aside>
+        </div>
+        <div class="row flex">
+            <aside class="box"></aside>
+            <main class="box">
+                <div class="inner"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+            </main>
+            <aside class="box"></aside>
+        </div>
+        <div class="row flex">
+            <aside class="box"></aside>
+            <main class="box">
+                <div class="inner"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+            </main>
+            <aside class="box"></aside>
+        </div>
+        <div class="row flex">
+            <aside class="box"></aside>
+            <main class="box">
+                <div class="inner"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+                <div style="width: 100px;height: 100px;background-color: yellow;"></div>
+            </main>
+            <aside class="box"></aside>
+        </div>
+    </div>
+    <footer>
+        <p>盒模型</p>
+    </footer>
+    <div class="more"></div>
+</body>
+
+</html>
