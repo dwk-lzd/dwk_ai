@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+
+<body>
+    <script>
+        // 函数是如何区分 构造 还是 执行的？
+        // 一个函数是一个对象，它有两个特殊的属性：[[Call]] 和 [[Construct]]。
+        // 函数在运行的时候有一个分支选择
+        // JavaScript 函数 可执行的对象 内部有两个方法：[[Call]] 和 [[Construct]]。
+        function Person(name, age) {
+            // 生成一个新的对象 {}
+            // this 指向这个对象
+            // [[Construct]] 帮我们完成了对象的构造，并把 this 指向这个对象
+
+            this.name = name;
+            this.age = age
+            // 完成了对象的构造
+        }
+        Person.prototype.sayHi = function () {
+            console.log(`你好我是${this.name}`);
+
+        }
+        // console.log(Person.prototype);
+        // constructor  生成一个新对象 {}
+        const haha = new Person('haha', 18)
+        console.log(haha.__proto__ === Person.prototype); // true
+        haha.sayHi() // 你好我是haha
+    </script>
+</body>
+
+</html>
