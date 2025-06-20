@@ -6,5 +6,6 @@
 
 - finetune
     - 微调 喂 CNN 数据集
-
+        文字类nlp 有优势
+        专业，openai 还需要huggingface z
     - large size model 大模型
