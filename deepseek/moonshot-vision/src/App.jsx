@@ -25,8 +25,49 @@ function App() {
     }
 
   }
-  const update = () => {
-
+  const update = async () => {
+    if (!imgBase64Data) return
+    const endpoint = 'https://api.moonshot.cn/v1/chat/completions'
+    const headers = {
+      'Content-Type': 'application/json',
+      // 授权码 Bearer 一般都会带，后面是token
+      'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`
+    }
+    // 实时反馈给用户 
+    setContent('正在生成中...')
+    const response = await fetch(
+      endpoint,
+      {
+        // get 提交没有请求体
+        method: 'POST',
+        // 当key和value一一对应的时候 可以省略
+        headers,
+        body: JSON.stringify({
+          model: 'moonshot-v1-8k-vision-preview',
+          messages: [
+            {
+              role: 'user',
+              content: [
+                {
+                  type: 'image_url',
+                  image_url: {
+                    'url': imgBase64Data
+                  }
+                },
+                {
+                  'type': 'text',
+                  'text': '请描述图片的内容',
+                }
+              ]
+            }
+          ]
+        })
+      }
+    )
+    // 从服务端发过来的数据 是二进制流 json() 同样是一个异步操作
+    const data = await response.json()
+    console.log(data);
+    setContent(data.choices[0].message.content)
   }
   return (
     <div className='container'>
