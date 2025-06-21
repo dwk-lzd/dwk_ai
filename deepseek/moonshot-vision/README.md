@@ -31,7 +31,7 @@
     - onChange
         e.target.files[0] 拿到文件对象
         - FileReader 读取文件对象
-        - 调用readAsDataURL 方法，读取文件内容
+        - 调用readAsDataURL 方法，以base64格式 读取文件内容
             - data？base64 数据
             - base64 可以直接作为img src
 
