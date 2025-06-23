@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = 'The window'
+        let b = 2
+        var obj = {
+            name: 'My object',
+            getNameFunc: function () {
+                // return this.name
+                var that = this
+                return function () {
+                    // return this.name
+                    return that.name
+                }
+            }
+        }
+        console.log(obj.getNameFunc()());//The window  当return this.name 为什么会是window对象，而不是obj对象？ 
+        // 返回一个函数相当于在外部把这个函数当作普通函数调用
+        // 当 return that.name 时，由于我们的that指向的是obj对象，所以返回的是obj对象的name属性值
+
+    </script>
+</body>
+
+</html>
