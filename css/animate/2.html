@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0;
+            top: 0;
+            background-color: red;
+            transition: left 1s ease-out;
+        }
+
+        .box.active {
+            left: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        // DOMContentLoaded 是浏览器提供的一个事件，它在HTML文档被完全加载和解析后触发， 
+        // 不需要等待 样式表、图片等外部资源加载完成。
+        document.addEventListener('DOMContentLoaded', () => {
+            // document.querySelector('.box').classList.add('active')
+            // 此时还没有渲染,但是我修改了样式,浏览器会重新渲染页面,也就不会有动画
+            // html css 下载好了,浏览器中的运行结合没有完成
+            // event loop 事件循环
+            // 虽然时间是0,但是 setTimeout 是一个宏任务,等待html + css 渲染完成 渲染优先
+            // 页面的渲染 比 setTimeout 更优先 此时会先渲染页面,然后再执行 setTimeout 就能看到动画了
+            setTimeout(() => {
+                document.querySelector('.box').classList.add('active')
+            }, 0)
+        })
+        // js是阻塞式的
+        // setTimeout(() => {
+        //     document.querySelector('.box').classList.add('active')
+        // }, 1000)
+    </script>
+</body>
+
+</html>
