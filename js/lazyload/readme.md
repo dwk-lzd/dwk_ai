@@ -28,3 +28,13 @@
     自定义属性  data-  数据属性
     图片的原地址是img 数据
     original 原来的
+- 目前缺点 性能问题
+    - 解决了性能问题（一次性加载图片，会造成卡顿影响页面加载） 首屏幕加载速度
+    - 带来了新的问题 onScroll 触发的次数太多  这里是JS性能问题 
+    - forEach  所有的imgs
+    - getCoundingClientRect  触发回流
+- 防抖 节流
+- IntersetionObserver 
+    - observer 观察 异步的，不是同步的  就好像在浏览器的后台
+    - Intersection  rect  和可视区域交叉
+    - 不再需要onscroll 不需要节流 
