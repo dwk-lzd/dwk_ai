@@ -107,11 +107,5 @@
 
 - 两个遗憾
     - ../../ 路径山路18湾
-        vite 配置alias 短路径 `` resolve: {
-    // 路径别名
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },``
-
-    - 
+        vite 配置alias 短路径 
+    - toggle、delete 跨越组件层级点多，useContext 
