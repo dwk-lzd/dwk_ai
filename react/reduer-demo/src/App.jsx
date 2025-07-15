@@ -49,6 +49,10 @@ const reducer = (state, action) => {
       return {
         count: state.count + parseInt(action.payload)
       }
+    case 'incrementTonum':
+      return {
+        count: state.count = action.payload
+      }
     default:
       return state
   }
@@ -63,14 +67,15 @@ function App() {
   const [count, setCount] = useState(0)
   // 适合大型项目
   // dispatch 派发  函数
-  // 参数固定 {tey:''} action_type
+  // 参数固定 {type:''} action_type
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <>
       <p>Count:{state.count}</p>
       <button onClick={() => dispatch({ type: 'increment' })}>+</button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <input type="text" value={count} onChange={(e) => setCount(e.target.value)} />
+      <button onClick={() => dispatch({ type: 'incrementTonum', payload: 20 })}>Add to 20</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button><br />
+      <input type="text" value={count} onChange={(e) => setCount(e.target.value)} /> <br />
       <button onClick={() => dispatch({ type: 'incrementBynum', payload: count })}>incrementBynum</button>
     </>
   )
