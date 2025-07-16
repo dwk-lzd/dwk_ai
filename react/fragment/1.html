@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<ul id="list"></ul>
+
+<body>
+    <script>
+        const items = [
+            {
+                id: 1,
+                title: '标题1',
+                content: '内容1'
+            },
+            {
+                id: 2,
+                title: '标题2',
+                content: '内容2'
+            },
+            {
+                id: 3,
+                title: '标题3',
+                content: '内容3'
+            }
+        ]
+        const container = document.getElementById('list')
+        // const oDiv = document.createElement('div')
+        // 性能优化，文档碎片
+        const fragment = document.createDocumentFragment()
+
+        items.forEach(ietm => {
+            const wrapper = document.createElement('div')
+            const title = document.createElement('h3')
+            const desc = document.createElement('p')
+            title.textContent = ietm.title
+            desc.textContent = ietm.content
+            wrapper.appendChild(title)
+            wrapper.appendChild(desc)
+            // oDiv.appendChild(wrapper)
+            // 在内存中appendChild创建节点，减少重绘重排次数
+            fragment.appendChild(wrapper)
+        })
+        // 批量挂载更新，减少重排次数
+        // container.appendChild(oDiv)
+        container.appendChild(fragment)
+    </script>
+</body>
+
+</html>
