@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们</title>
+</head>
+
+<body>
+    <h1>联系我们</h1>
+    <button onclick="navifateHistory(-2)">返回主页</button>
+    <button onclick="navifateHistory(-1)">后退一页关于我们</button>
+    <button onclick="history.back()">后退一页</button>
+    <script>
+        function navifateHistory(steps) {
+            history.go(steps)
+        }
+    </script>
+</body>
+
+</html>
