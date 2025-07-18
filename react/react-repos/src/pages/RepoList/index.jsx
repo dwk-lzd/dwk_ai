@@ -30,7 +30,7 @@ const RepoList = () => {
             {
                 repos.map((repo) => (
                     <div key={repo.id}>
-                        <Link key={repo.id} to={`/users/${id}/repos/${repo}`}>
+                        <Link key={repo.id} to={`/users/${id}/repos/${repo.name}`}>
                             {repo.name}
                         </Link>
                     </div>

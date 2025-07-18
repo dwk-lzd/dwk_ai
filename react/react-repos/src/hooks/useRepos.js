@@ -24,7 +24,10 @@ export const useRepos = (id) => {
                     payload: res.data
                 })
             } catch (err) {
-
+                dispatch({
+                    type: "FETCH_ERROR",
+                    payload: err.message,
+                })
             }
         })()
     }, [])
