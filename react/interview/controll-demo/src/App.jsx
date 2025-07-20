@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import './App.css'
+import _ from 'lodash'
 
 function ControlledInput({ onSubmit }) {
   const [value, setValue] = useState('') // 响应式状态
@@ -11,13 +12,15 @@ function ControlledInput({ onSubmit }) {
   }
 
   const handleChange = (e) => {
-    setValue(e.target.value)
+    setValue(e.target.value);
     // 频繁触发  实时判断表单是否合格
-    if (e.target.value.length < 6) {
-      setError('输入的内容不能小于6个字符')
-    } else {
-      setError('')
-    }
+    (_.debounce(() => {
+      if (e.target.value.length < 6) {
+        setError('输入的内容不能小于6个字符')
+      } else {
+        setError('')
+      }
+    }, 1000))()
   }
   return (
     <form onSubmit={handleSubmit}>
