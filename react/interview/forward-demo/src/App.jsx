@@ -14,8 +14,9 @@ const Guang = (props, ref) => {
     </div>
   )
 }
-// 在父组件控制子组件的ref
+// 在父组件控制子组件的DOM
 // 将组件作为forwardRef()参数返回,一个全新的组件，这个组件可以接受一个ref参数，
+// 高阶组件
 const WrapperGuang = forwardRef(Guang)
 
 function App() {
