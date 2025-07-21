@@ -35,7 +35,7 @@ function App() {
       {
         repos.map(repo => (
           <div key={repo.id}>
-            <h2>{repo.title}</h2>
+            <h2>{repo.name}</h2>
             <p>{repo.description}</p>
           </div>
         ))

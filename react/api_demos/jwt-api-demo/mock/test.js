@@ -29,12 +29,12 @@ export default [
             const repos = [
                 {
                     id: 695370163,
-                    title: 'ai_lesson',
+                    name: 'ai_lesson',
                     description: "AI全栈工程师课程",
                 },
                 {
                     id: 152578450,
-                    title: 'AlloyFinger',
+                    name: 'AlloyFinger',
                     description: "super tiny size multi-touch gestures library for the web. 　　　You can touch this",
                 }
             ]
