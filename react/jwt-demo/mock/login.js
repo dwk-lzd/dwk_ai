@@ -1,4 +1,11 @@
+import jwt from 'jsonwebtoken'
+
 // login 模块 mock 
+
+// 安全性 编码的时候加密
+// 解码的时候用于解码
+const secret = '!&124coddefgg'
+
 export default [
     {
         url: '/api/login',
@@ -7,10 +14,52 @@ export default [
         response: (req, res) => {
             // req, username, password
             const { username, password } = req.body;
+            if (username !== 'admin' || password !== '123456') {
+                return {
+                    code: 1,
+                    message: '用户名或密码错误'
+                }
+            }
+            // 生成token 颁发一个令牌
+            // json 用户数据
+            const token = jwt.sign({
+                user: {
+                    id: "001",
+                    username: "admin",
+                }
+            }, secret, {
+                expiresIn: 86400, // 有效期24小时
+            })
             return {
+                token,
                 username,
                 password
             }
         }
+    },
+    {
+        url: '/api/user',
+        method: 'get',
+        response: (req, res) => {
+            // 用户端 token headers
+            const token = req.headers['authorization'];
+            try {
+                const decode = jwt.verify(token, secret)
+                console.log(decode);
+                return {
+                    code: 0,
+                    data: decode.user
+                }
+            } catch (err) {
+                return {
+                    code: 1,
+                    message: 'Invalid Token'
+                }
+            }
+            return {
+                token
+            }
+        }
+
     }
 ]
