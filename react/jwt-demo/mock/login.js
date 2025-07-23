@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 
 // 安全性 编码的时候加密
 // 解码的时候用于解码
+// 加盐
 const secret = '!&124coddefgg'
 
 export default [
@@ -32,8 +33,10 @@ export default [
             })
             return {
                 token,
-                username,
-                password
+                data: {
+                    id: "001",
+                    username: "admin"
+                }
             }
         }
     },
@@ -42,7 +45,8 @@ export default [
         method: 'get',
         response: (req, res) => {
             // 用户端 token headers
-            const token = req.headers['authorization'];
+            const token = req.headers['authorization'].split(' ')[1];
+            console.log(token);
             try {
                 const decode = jwt.verify(token, secret)
                 console.log(decode);

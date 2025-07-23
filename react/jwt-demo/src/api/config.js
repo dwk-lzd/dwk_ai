@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'http://localhost:5173/api'
 axios.interceptors.request.use(config => {
     // console.log('////');
     let token = localStorage.getItem('token') || '';
-    config.headers.Authorization = token
+    if (token) config.headers.Authorization = `Bearer ${token}`
     // config.headers.Authorization = token
     return config
 })
