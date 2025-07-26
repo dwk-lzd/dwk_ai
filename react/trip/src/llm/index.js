@@ -48,3 +48,12 @@ export const kimitChat = async (message) => {
     )
     return res
 }
+
+export const generateAvatar = async (text) => {
+    // 设计prompt
+    const prompt = `
+    你是一位漫画设计师，需要为用户设计头像，主打可爱萌系风格，请根据用户提供的文本生成一个可爱的头像。
+    用户的信息时${text}
+    要求有个性，有创意，有设计感
+    `
+}

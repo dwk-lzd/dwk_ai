@@ -11,11 +11,12 @@
 }
 
 .input {
-    margin: right 8px;
+    margin-right: 8px;
+
 }
 
 .messageLeft,
-.messageRigth {
+.messageRight {
     max-width: 70%;
     padding: 8px 12px;
     margin: 6px 0;

@@ -37,60 +37,8 @@ const Trip = () => {
             role: 'assistant',
 
         },
-        {
-            id: 2,
-            content: 'hello~',
-            role: 'user'
-        },
-        {
-            id: 1,
-            content: 'hello, I am your assistant. What can I do for you?',
-            role: 'assistant',
 
-        },
-        {
-            id: 2,
-            content: 'hello~',
-            role: 'user'
-        },
-        {
-            id: 1,
-            content: 'hello, I am your assistant. What can I do for you?',
-            role: 'assistant',
 
-        }, {
-            id: 2,
-            content: 'hello~',
-            role: 'user'
-        },
-        {
-            id: 1,
-            content: 'hello, I am your assistant. What can I do for you?',
-            role: 'assistant',
-
-        },
-        {
-            id: 2,
-            content: 'hello~',
-            role: 'user'
-        },
-        {
-            id: 1,
-            content: 'hello, I am your assistant. What can I do for you?',
-            role: 'assistant',
-
-        },
-        {
-            id: 2,
-            content: 'hello~',
-            role: 'user'
-        },
-        {
-            id: 1,
-            content: 'hello, I am your assistant. What can I do for you?',
-            role: 'assistant',
-
-        }
     ])
     const handleChat = async () => {
         if (text.trim() === "") {
@@ -124,7 +72,7 @@ const Trip = () => {
         setIsSending(false);
     }
     return (
-        <div className="flex flex-col h-all">
+        <div className="flex flex-col h-screen">
             <div className={`flex-1 ${styles.chatArea}`}>
                 {messages.map((msg, index) => (
                     <div
