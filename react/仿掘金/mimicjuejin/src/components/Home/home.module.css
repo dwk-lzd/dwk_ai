@@ -1,0 +1,16 @@
+.top {
+    background-color: white;
+    margin-bottom: 30px;
+}
+
+.tab {
+    margin-bottom: 40px;
+}
+
+.search {
+    max-width: 100%;
+}
+
+.center {
+    margin: auto;
+}
