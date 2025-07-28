@@ -72,7 +72,7 @@ const Trip = () => {
         setIsSending(false);
     }
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-all">
             <div className={`flex-1 ${styles.chatArea}`}>
                 {messages.map((msg, index) => (
                     <div

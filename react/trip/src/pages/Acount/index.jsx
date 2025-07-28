@@ -23,10 +23,10 @@ import {
 } from '@/llm'
 const Acount = () => {
     const [userInfo, setUserInfo] = useState({
-        nickname: '奶龙',
+        nickname: '二二三四',
         level: '5级',
         slogan: 'AAA大运重卡(只跑国道)',
-        avatar: 'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg',
+        avatar: 'https://resouces.modelscope.cn/cover-images/88aa6906-bc1e-4392-9311-a76aebd0307e.png?x-oss-process=image/format,jpg/quality,Q_50',
     })
     useTitle('我的')
     const [showActionSheet, setShowActionSheet] = useState(false)
@@ -71,7 +71,7 @@ const Acount = () => {
                 />
                 <div className='mt4'>
                     <div className={styles.nickname}>昵称：{userInfo.nickname}</div>
-                    <div className={styles.level}>昵称：{userInfo.level}</div>
+                    <div className={styles.level}>等级：{userInfo.level}</div>
                     <div className={styles.slogan}>签名：{userInfo.slogan}</div>
                 </div>
             </div>
