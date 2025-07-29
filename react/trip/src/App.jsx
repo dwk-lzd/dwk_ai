@@ -16,7 +16,7 @@ const Discount = lazy(() => import('@/pages/Discount'))
 const Collection = lazy(() => import('@/pages/Collection'))
 const Trip = lazy(() => import('@/pages/Trip'))
 const Acount = lazy(() => import('@/pages/Acount'))
-
+const Detail = lazy(() => import('@/pages/Detail'))
 import './App.css'
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
 
           <Route path='/' element={<BlankLayout />}>
             <Route path='/search' element={<Search />} />
+            <Route path='/detail/:id' element={<Detail />} />
           </Route>
         </Routes>
 

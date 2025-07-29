@@ -1,3 +1,10 @@
+.resultsContainer {
+    position: relative;
+    top: 40px;
+    width: 100%;
+}
+
+/* 调整原有样式 */
 .container {
     position: fixed;
     top: 0;
@@ -7,7 +14,6 @@
     z-index: 100;
     overflow: hidden;
     background: #f2f3f4;
-
 }
 
 .list {

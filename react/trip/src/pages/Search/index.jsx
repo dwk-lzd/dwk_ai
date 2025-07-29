@@ -45,22 +45,25 @@ const Search = () => {
         setSuggestList(query)
     }
 
-    const suggestListStyle = {
-        display: query === '' ? 'none' : 'block'
-    }
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <SearchBox handleQuery={handleQuery} />
-                <HotListItems hotList={hotList} />
-                <div className={styles.list} style={suggestListStyle}>
-                    {
-                        suggestList.map(item => (
-                            <div key={item} className={styles.item}>
-                                {item}
-                            </div>
-                        ))
-                    }
+                <div className={styles.resultsContainer}>
+                    {/* 修改点2：根据query值条件渲染热门搜索 */}
+                    {!query && <HotListItems hotList={hotList} />}
+
+                    {/* 修改点3：根据query值条件渲染搜索建议 */}
+                    {query && (
+                        <div className={styles.list}>
+                            {suggestList.map(item => (
+                                <div key={item} className={styles.item}>
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 
