@@ -10,6 +10,7 @@ import {
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
 import Loading from '@/components/Loading'
+import Toast from '@/components/Toast'
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
 const Discount = lazy(() => import('@/pages/Discount'))
@@ -46,6 +47,7 @@ function App() {
 
 
       </Suspense>
+      <Toast />
     </>
   )
 }
