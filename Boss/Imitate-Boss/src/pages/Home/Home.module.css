@@ -1,0 +1,13 @@
+.search {
+    padding: 0;
+}
+
+.tabbar {
+    font-size: 32px;
+}
+
+.active {
+    color: black;
+    font-weight: bold;
+    font-size: 36px;
+}
