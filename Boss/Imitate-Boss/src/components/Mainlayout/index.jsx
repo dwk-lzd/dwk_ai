@@ -21,8 +21,8 @@ const MainLayout = () => {
     const navigate = useNavigate();
     const tabs = [
         { icon: <Lock />, title: '求职', path: '/home' },
-        { icon: <Chat />, title: 'AI对话', path: '/aiConversation' },
         { icon: <Friends />, title: '广场', path: '/square' },
+        { icon: <Chat />, title: 'AI对话', path: '/aiConversation' },
         { icon: <Manager />, title: '我的', path: '/acount' },
     ]
     useEffect(() => {
@@ -37,7 +37,7 @@ const MainLayout = () => {
             style={{ paddingBottom: '50px' }}
         >
             <div className={styles.header}>
-                <span>BOSS直聘</span>
+                <span>bubu招聘</span>
             </div>
             <div className={`flex-1 flex flex-col`}>
                 <Outlet />

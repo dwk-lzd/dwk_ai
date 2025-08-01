@@ -32,5 +32,125 @@ export default [
                 data: getJobs(page)
             };
         },
+    },
+    {
+        url: '/api/search',
+        method: 'get',
+        timeout: 400,
+        response: (req, res) => {
+            return {
+                code: 0,
+                data: [
+                    {
+                        id: 1,
+                        name: '前端开发工程师',
+                    },
+                    {
+                        id: 2,
+                        name: '网络安全工程师',
+                    },
+                    {
+                        id: 3,
+                        name: 'UI/UX设计师',
+                    },
+                    {
+                        id: 4,
+                        name: '后端开发工程师',
+                    },
+                    {
+                        id: 5,
+                        name: '软件测试工程师',
+                    },
+                    {
+                        id: 6,
+                        name: '产品经理',
+                    },
+                    {
+                        id: 7,
+                        name: '数据分析师',
+                    },
+                    {
+                        id: 8,
+                        name: '运维工程师',
+                    },
+                ]
+            }
+        }
+    },
+    {
+        url: '/api/suggestSearch',
+        method: 'get',
+        timeout: 1000,
+        response: (req, res) => {
+            const keyword = req.query.keyword;
+
+            // 職位名稱庫
+            const jobTitles = [
+                '前端开发工程师',
+                'React开发工程师',
+                'Vue开发工程师',
+                'JavaScript开发工程师',
+                '前端开发',
+                '前端牛马工程师',
+                '前端架构师',
+                '前端讲师',
+                'UI设计师',
+                'UI设计师讲师',
+                '产品经理',
+                '数据分析师',
+                '后端开发工程师',
+                'Java开发工程师',
+                'Java后端开发工程师',
+                'Java后端架构师',
+                'Python开发工程师',
+                'Python后端开发工程师',
+                'Python讲师',
+                '运维工程师',
+                '测试工程师',
+                '算法工程师',
+                '算法讲师',
+                '移动端开发工程师',
+                '移动端开发讲师',
+                '全栈开发工程师',
+                '全栈开发讲师',
+                'Node.js开发工程师',
+                'Node.js讲师',
+                'TypeScript开发工程师',
+                'TypeScript讲师',
+                '小程序开发工程师',
+                '小程序开发讲师',
+                'H5开发工程师',
+                'H5开发讲师',
+            ];
+
+            let suggestions = [];
+
+            if (keyword && keyword.trim()) {
+                // 根據關鍵詞過濾匹配的職位
+                const matchedJobs = jobTitles.filter(title =>
+                    title.toLowerCase().includes(keyword.toLowerCase())
+                );
+
+                // 隨機選擇3-6個匹配的職位
+                const count = Mock.Random.integer(3, 6);
+                suggestions = Mock.Random.shuffle(matchedJobs).slice(0, count);
+            } else {
+                // 無關鍵詞時隨機返回3-5個職位
+                const count = Mock.Random.integer(3, 5);
+                suggestions = Mock.Random.shuffle(jobTitles).slice(0, count);
+            }
+
+            // 轉換為需要的格式
+            const result = suggestions.map((name, index) => ({
+                id: index + 1,
+                name: name
+            }));
+
+            return {
+                code: 0,
+                data: result,
+                message: 'success'
+            }
+        }
     }
 ]

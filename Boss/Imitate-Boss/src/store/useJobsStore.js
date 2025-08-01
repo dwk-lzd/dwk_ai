@@ -13,7 +13,7 @@ export const useJobsStore = create((set, get) => ({
         // 更新状态，表示正在请求中
         set({ Loading: true })
         const res = await getJobs(get().page)
-        console.log(res);
+        // console.log(res);
         const newJobs = res.data
         set(state => ({
             jobs: [...state.jobs, ...newJobs],

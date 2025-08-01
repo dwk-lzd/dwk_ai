@@ -12,11 +12,13 @@ import {
   Loading
 } from 'react-vant'
 import './App.css'
+import Blanklayout from './components/Blanklayout/index.jsx'
 import MainLayout from './components/Mainlayout/index.jsx'
 const Home = lazy(() => import('./pages/Home'))
 const AiConversation = lazy(() => import('./pages/AiConversation'))
 const Square = lazy(() => import('./pages/Square'))
 const Acount = lazy(() => import('./pages/Acount/index.jsx'))
+const Search = lazy(() => import('./pages/Search/index.jsx'))
 function App() {
 
 
@@ -30,6 +32,9 @@ function App() {
             <Route path='/aiConversation' element={<AiConversation />} />
             <Route path='/square' element={<Square />} />
             <Route path='/acount' element={<Acount />} />
+          </Route>
+          <Route path='/' element={<Blanklayout />}>
+            <Route path='/search' element={<Search />} />
           </Route>
         </Routes>
       </Suspense>

@@ -1,0 +1,26 @@
+.historyContainer {
+    background: linear-gradient(to bottom, #81ecec 0%, white 100%);
+    border-radius: 15px;
+    margin: 0 10px 20px 10px;
+    box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.historyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.historyList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.historyItem {
+    display: flex;
+    background: linear-gradient(to bottom, #cccccc 0%, white 90%);
+    margin: 10px;
+    font-size: 28px;
+    border-radius: 50px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+}

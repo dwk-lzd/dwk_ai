@@ -63,7 +63,9 @@ const Home = () => {
                     ))}
                 </Tabbar>
 
-                <Search shape='round' className={styles.search} />
+                <Search shape='round' className={styles.search} onFocus={() => {
+                    navigate('/search')
+                }} />
             </div>
             <div>
                 <Tabbar

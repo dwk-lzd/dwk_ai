@@ -6,7 +6,8 @@ import {
     Button,
     Input,
     Loading,
-    Toast
+    Toast,
+    Image
 } from 'react-vant'
 import { chat } from '@/llm/index.js'
 import styles from './AiConversation.module.css'
@@ -24,7 +25,7 @@ const AiConversation = () => {
         },
         {
             id: 2,
-            content: '你好，我是您的招聘小助手',
+            content: '你好，我是您的招聘小助手,有什么可以帮您的吗？',
             role: 'assistant'
         },
     ]);
@@ -50,17 +51,27 @@ const AiConversation = () => {
     }
     return (
         <div className="flex flex-col h-all">
-            <div className={`flex-1 ${styles.chatArea}`}>
-                {
-                    messages.map((msg, index) => (
-                        <div key={index} className={`flex ${msg.role === 'user' ? styles.messageRight : styles.messageLeft}`}>
-                            {msg.role === 'assistant' ? <ChatO /> : <UserO />}
-                            <div className={styles.messageContent}>
-                                {msg.content}
+            <div className={styles.header}>
+                <div className={styles.headerLeft}>
+                    <Image round src="https://resouces.modelscope.cn/cover-images/88aa6906-bc1e-4392-9311-a76aebd0307e.png?x-oss-process=image/format,jpg/quality,Q_50" />
+                </div>
+                <div className={styles.headerRight}>
+                    布布AI智能招聘助手
+                </div>
+            </div>
+            <div className={styles.chatAreaWrapper}>
+                <div className={`flex-1 ${styles.chatArea}`}>
+                    {
+                        messages.map((msg, index) => (
+                            <div key={index} className={`${msg.role === 'user' ? styles.messageRight : styles.messageLeft}`}>
+                                {msg.role === 'assistant' ? <ChatO /> : <UserO />}
+                                <div className={styles.messageContent}>
+                                    {msg.content}
+                                </div>
                             </div>
-                        </div>
-                    ))
-                }
+                        ))
+                    }
+                </div>
             </div>
             <div className={`flex ${styles.inputArea}`}>
                 <Input
@@ -69,7 +80,7 @@ const AiConversation = () => {
                     placeholder="请输入消息"
                     className={`flex-1 ${styles.input}`}
                 />
-                <Button disabled={isSending} type="primary" onClick={handleChat} >发送</Button>
+                <Button disabled={isSending} type="primary" onClick={handleChat} className={styles.button}>发送</Button>
             </div>
             {isSending && (<div className="fixed-loading"><Loading type="ball" /></div>)}
         </div>
