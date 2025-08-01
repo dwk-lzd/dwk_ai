@@ -1,0 +1,11 @@
+.searchHeader {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    background: #81ecec;
+    margin-bottom: 28px;
+}
+
+.searchButton {
+    font-size: 28px;
+}

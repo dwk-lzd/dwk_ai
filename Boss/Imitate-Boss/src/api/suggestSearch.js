@@ -1,5 +1,4 @@
 import axios from './config'
-
 export const getSuggestSearch = (keyword) => {
     return axios.get('/suggestSearch', {
         params: {
@@ -7,3 +6,5 @@ export const getSuggestSearch = (keyword) => {
         }
     })
 }
+
+

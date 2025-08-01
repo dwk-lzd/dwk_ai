@@ -80,7 +80,6 @@ export default [
     {
         url: '/api/suggestSearch',
         method: 'get',
-        timeout: 1000,
         response: (req, res) => {
             const keyword = req.query.keyword;
 

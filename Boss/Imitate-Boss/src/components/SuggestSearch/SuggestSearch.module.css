@@ -1,0 +1,20 @@
+.suggestSearch {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #eaea1f4c 0%, white 100%);
+    border-radius: 10px;
+    margin: 0 10px 10px 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.suggestItemContainer {
+    font-size: 28px;
+    font-weight: 200;
+}
+
+.suggestItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

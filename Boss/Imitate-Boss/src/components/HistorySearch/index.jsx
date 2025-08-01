@@ -3,15 +3,16 @@ import {
     useEffect
 } from 'react'
 import {
-    Cross
+    Close,
+    ClockO
 } from '@react-vant/icons'
 import {
     useHistoryStore
 } from '@/store/useHistoryStore'
 import styles from './HistorySearch.module.css'
 
-const HistorySearch = () => {
-    const { historyList, addHistory, removeHistory, clearHistory } = useHistoryStore()
+const HistorySearch = ({ historyList }) => {
+    const { addHistory, removeHistory, clearHistory } = useHistoryStore()
 
     return (
         <div className={`${styles.historyContainer}`}>
@@ -28,10 +29,13 @@ const HistorySearch = () => {
                     historyList.map((item) => {
                         return (
                             <div key={item.id} className={`${styles.historyItem}`}>
+                                <div className={`${styles.historyItemClock}`}>
+                                    <ClockO fontSize={16} color='blue' />
+                                </div>
                                 <div>
                                     {item.text}
                                 </div>
-                                <div
+                                <div className={`${styles.historyItemCross}`}
                                     onClick={() => {
                                         removeHistory(item.id)
                                         // 同時清除本地存儲
@@ -40,7 +44,7 @@ const HistorySearch = () => {
                                         localStorage.setItem('searchHistory', JSON.stringify(updatedHistory))
                                     }}
                                 >
-                                    <Cross fontSize={10} />
+                                    <Close fontSize={16} color='red' />
                                 </div>
                             </div>
                         )
