@@ -2,8 +2,7 @@
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    background: #81ecec;
-    margin-bottom: 28px;
+    background: #81ecec49;
 }
 
 .searchButton {

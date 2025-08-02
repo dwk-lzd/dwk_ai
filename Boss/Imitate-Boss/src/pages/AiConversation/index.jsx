@@ -9,6 +9,7 @@ import {
     Toast,
     Image
 } from 'react-vant'
+import ReactMarkdown from 'react-markdown'
 import { chat } from '@/llm/index.js'
 import styles from './AiConversation.module.css'
 import { ChatO, UserO } from '@react-vant/icons';
@@ -69,9 +70,9 @@ const AiConversation = () => {
                     {
                         messages.map((msg, index) => (
                             <div key={index} className={`${msg.role === 'user' ? styles.messageRight : styles.messageLeft}`}>
-                                {msg.role === 'assistant' ? <ChatO /> : <UserO />}
+                                {msg.role === 'assistant' ? <Icon type='icon-a-zhinengjiqirenjiqiren' size={20} /> : <Icon type='icon-yonghu-nan' size={20} />}
                                 <div className={styles.messageContent}>
-                                    {msg.content}
+                                    <ReactMarkdown>{msg.content}</ReactMarkdown>
                                 </div>
                             </div>
                         ))

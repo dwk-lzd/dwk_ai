@@ -2,10 +2,9 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    background: linear-gradient(to bottom, #eaea1f4c 0%, white 100%);
+    background: white;
     border-radius: 10px;
-    margin: 0 10px 10px 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
 }
 
 .suggestItemContainer {

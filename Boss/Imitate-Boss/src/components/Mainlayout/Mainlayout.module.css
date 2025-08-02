@@ -1,5 +1,5 @@
 .header {
-    background: linear-gradient(90deg, #81ecec 0%, #ffddd2 90%);
+    background: #81ecec49;
     font-size: 32px;
     font-weight: 700;
     color: #029f9f;
@@ -8,4 +8,13 @@
     height: 80px;
     line-height: 80px;
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+
+.header_title {
+    font-size: 20px;
+    margin: auto
 }

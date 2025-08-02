@@ -38,7 +38,9 @@ const MainLayout = () => {
             style={{ paddingBottom: '50px' }}
         >
             <div className={styles.header}>
-                <span>bubu招聘</span>
+                <div className={styles.header_title}>
+                    <h1>bubu智聘</h1>
+                </div>
             </div>
             <div className={`flex-1 flex flex-col`}>
                 <Outlet />

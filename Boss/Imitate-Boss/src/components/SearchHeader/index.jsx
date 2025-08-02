@@ -56,7 +56,7 @@ const SearchHeader = ({
                 value={value}
                 label='搜索'
                 shape='round'
-                background='#81ecec'
+                background='#81ecec0f'
                 placeholder={placeholder}
                 className={`flex-1`}
                 onChange={(value) => {
@@ -67,7 +67,7 @@ const SearchHeader = ({
             <Button
                 round
                 size='small'
-                color='blue'
+                color='#81ececc0'
                 className={`${styles.searchButton}`}
                 disabled={value.trim() === '' ? true : false}
                 onClick={onSearch}
