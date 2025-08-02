@@ -12,6 +12,8 @@ import {
 import { chat } from '@/llm/index.js'
 import styles from './AiConversation.module.css'
 import { ChatO, UserO } from '@react-vant/icons';
+import Icon from "@/components/Icon/Icon"
+
 const AiConversation = () => {
     const [text, setText] = useState("");
     const [isSending, setIsSending] = useState(false);
@@ -57,6 +59,9 @@ const AiConversation = () => {
                 </div>
                 <div className={styles.headerRight}>
                     布布AI智能招聘助手
+                </div>
+                <div>
+                    <Icon type='icon-zaixiankefu' size={24} />
                 </div>
             </div>
             <div className={styles.chatAreaWrapper}>

@@ -43,6 +43,7 @@
     height: 100%;
     position: relative;
     z-index: 1;
+    background: linear-gradient(to bottom, #a6ea1f4c 0%, white 100%);
 }
 
 .chatArea::after {
