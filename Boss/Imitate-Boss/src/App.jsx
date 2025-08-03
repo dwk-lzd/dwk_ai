@@ -19,6 +19,8 @@ const AiConversation = lazy(() => import('./pages/AiConversation'))
 const Square = lazy(() => import('./pages/Square'))
 const Acount = lazy(() => import('./pages/Acount/index.jsx'))
 const Search = lazy(() => import('./pages/Search/index.jsx'))
+const Login = lazy(() => import('./pages/Login/index.jsx'))
+const RequireAuth = lazy(() => import('./components/RequireAuth/index.jsx'))
 function App() {
 
 
@@ -31,10 +33,13 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/aiConversation' element={<AiConversation />} />
             <Route path='/square' element={<Square />} />
-            <Route path='/acount' element={<Acount />} />
+            <Route path='/acount' element={<RequireAuth>
+              <Acount />
+            </RequireAuth>} />
           </Route>
           <Route path='/' element={<Blanklayout />}>
             <Route path='/search' element={<Search />} />
+            <Route path='/login' element={<Login />} />
           </Route>
         </Routes>
       </Suspense>

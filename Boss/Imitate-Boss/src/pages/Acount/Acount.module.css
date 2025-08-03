@@ -192,6 +192,14 @@
     word-break: break-word;
 }
 
+.logout {
+    margin: 15px 1% 0 1%;
+    width: 98%;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
 .footer {
     margin: 20px 0 0 0;
     display: flex;

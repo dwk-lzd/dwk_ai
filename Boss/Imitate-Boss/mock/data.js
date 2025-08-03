@@ -1,4 +1,7 @@
 import Mock from 'mockjs';
+import jwt from 'jsonwebtoken'
+
+const secret = '$^%&&^&*^&^*&'
 
 const getJobs = (page, pageSize = 10) => {
     return Array.from({ length: pageSize }, (_, i) => ({
@@ -149,6 +152,56 @@ export default [
                 code: 0,
                 data: result,
                 message: 'success'
+            }
+        }
+    },
+    {
+        url: '/api/login',
+        method: 'post',
+        timeout: 1000,
+        response: (req, res) => {
+            const { username, password } = req.body
+            if ((username !== 'job_seeker1' || password !== '123456') && (username !== 'job_seeker2' || password !== '123456')) {
+                return {
+                    code: 1,
+                    message: '用户名或密码错误'
+                }
+            }
+            const token = jwt.sign({
+                user: {
+                    id: username === 'job_seeker1' ? '001' : '002',
+                    username,
+                }
+            }, secret, {
+                expiresIn: 86400,
+            })
+            return {
+                code: 0,
+                token,
+                data: {
+                    id: username === 'job_seeker1' ? '001' : '002',
+                    username,
+                }
+            }
+        }
+    },
+    {
+        url: '/api/user',
+        method: 'get',
+        response: (req, res) => {
+            const token = req.headers['authorization'].split(' ')[1]
+
+            if (token) {
+                const decode = jwt.verify(token, secret)
+                return {
+                    code: 0,
+                    user: decode.username
+                }
+            } else {
+                return {
+                    code: 1,
+                    message: 'Invalid Token'
+                }
             }
         }
     }

@@ -1,6 +1,8 @@
 import {
-    useState
+    useState,
+    useEffect
 } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './Acount.module.css'
 import {
     Image,
@@ -19,10 +21,17 @@ import {
 } from '@react-vant/icons'
 import Icon from '@/components/Icon/Icon'
 import schoolLogo from '@/assets/school.png'
+import { useUserStore } from '@/store/useUserStore'
 
 const Acount = () => {
+    const { user, getUserInfo } = useUserStore()
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
     const [userInfo, setUserInfo] = useState({
-        nickname: '二二三四',
+        nickname: user || '二二三四',
         slogan: 'AAA大运重卡(只跑国道)',
         graduateTime: '2026年毕业',
         level: '本科',
@@ -174,6 +183,18 @@ const Acount = () => {
                         ))
                     }
                 </div>
+            </div>
+
+            {/* 登出按钮 */}
+            <div className={styles.logout}>
+                <Button
+                    round
+                    size='large'
+                    color='#029F9F'
+                    onClick={handleLogout}
+                >
+                    登出
+                </Button>
             </div>
 
             {/* 底部备案信息 */}
