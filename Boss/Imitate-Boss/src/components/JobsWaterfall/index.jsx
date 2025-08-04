@@ -4,7 +4,7 @@ import {
     useRef
 } from 'react'
 import styles from './JobsWaterfall.module.css'
-
+import ImageCard from '@/components/ImageCard'
 const JobsWaterfall = ({ jobs, fetchMore }) => {
     useEffect(() => {
         // fetchMore()
@@ -49,7 +49,7 @@ const JobsWaterfall = ({ jobs, fetchMore }) => {
                             </div>
                             <div className={styles.jobsItemFooter}>
                                 <div className={styles.jobsItemFooterCompany}>
-                                    <img src={item.company.logo} alt="" />
+                                    <ImageCard url={item.company.logo} height={40} />
                                     <div>
                                         <p>{item.company.name}</p>
                                         <p>{item.company.size}</p>
