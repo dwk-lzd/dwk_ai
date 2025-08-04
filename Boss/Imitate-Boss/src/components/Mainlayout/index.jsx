@@ -14,6 +14,12 @@ import {
 // } from '@react-vant/icons'
 import Icon from "@/components/Icon/Icon"
 import {
+    Lock,
+    Manager,
+    Chat,
+    Friends
+} from '@react-vant/icons'
+import {
     Outlet,
     useNavigate
 } from "react-router-dom"
@@ -21,10 +27,10 @@ const MainLayout = () => {
     const [active, setActive] = useState(0)
     const navigate = useNavigate();
     const tabs = [
-        { icon: <Icon type='icon-qiuzhizhaocai' size={24} />, title: '求职', path: '/home' },
-        { icon: <Icon type='icon-qingdaowusiguangchang-copy' size={24} />, title: '广场', path: '/square' },
-        { icon: <Icon type='icon-chat' size={24} />, title: 'AI对话', path: '/aiConversation' },
-        { icon: <Icon type='icon-wode1' size={24} />, title: '我的', path: '/acount' },
+        { icon: <Lock />, title: '求职', path: '/home' },
+        { icon: <Manager />, title: '广场', path: '/square' },
+        { icon: <Chat />, title: 'AI对话', path: '/aiConversation' },
+        { icon: <Friends />, title: '我的', path: '/acount' },
     ]
     useEffect(() => {
         // 监听路由变化，更新底部导航的激活状态

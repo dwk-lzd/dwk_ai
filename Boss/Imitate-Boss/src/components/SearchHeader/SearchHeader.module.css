@@ -5,6 +5,8 @@
     background: #81ecec49;
 }
 
-.searchButton {
+.searchButton span {
     font-size: 28px;
+    color: black;
+    font-weight: 600;
 }

@@ -67,12 +67,14 @@ const SearchHeader = ({
             <Button
                 round
                 size='small'
-                color='#81ececc0'
+                color='linear-gradient(to right, rgb(200, 243, 230), rgb(232, 255, 249))'
                 className={`${styles.searchButton}`}
                 disabled={value.trim() === '' ? true : false}
                 onClick={onSearch}
-            >搜索</Button>
-        </div>
+            >
+                <span>搜索</span>
+            </Button>
+        </div >
     )
 }
 

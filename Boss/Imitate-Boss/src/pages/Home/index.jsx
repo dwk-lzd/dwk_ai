@@ -4,95 +4,88 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom'
 import {
-    Tabbar,
-    Search,
+    Swiper,
     Tabs
 } from 'react-vant'
-import Jobs from '@/pages/Jobs/index.jsx'
 import styles from './Home.module.css'
 import {
-    Hot,
-    VipCard,
-    AddSquare,
-    Location
+    Arrow,
 } from '@react-vant/icons'
+import Icon from '@/components/Icon/Icon.jsx'
+import JobsWaterfall from '@/components/JobsWaterfall/index.jsx'
+import {
+    useJobsStore
+} from '@/store/useJobsStore'
+
+
+import swiper1 from '@/assets/swiper/swiper1.png'
+import swiper2 from '@/assets/swiper/swiper2.png'
+import swiper3 from '@/assets/swiper/swiper3.png'
+import swiper4 from '@/assets/swiper/swiper4.png'
+import swiper5 from '@/assets/swiper/swiper5.png'
+import swiper6 from '@/assets/swiper/swiper6.png'
+import swiper7 from '@/assets/swiper/swiper7.png'
 const Home = () => {
-
-
-    const [active, setActive] = useState(1)
     const navigate = useNavigate()
-    const tabs = [
-        { title: '全职', path: '/home/fulljob' },
-        { title: '实习', path: '/home/internship' },
-        { title: '兼职', path: '/home/parttime' },
-    ]
-    const tabs2 = [
-        { title: '附近工作', icon: <Location /> },
-        { title: '热门工作', icon: <Hot /> },
-        { title: 'VIP特权', icon: <VipCard /> },
-        { title: '全部', icon: <AddSquare /> },
-    ]
-    const jobs = [
-        { title: '前端开发' },
-        { title: '后端开发' },
-        { title: 'Java' },
-        { title: '测试' },
-        { title: '运维' },
+    const { fetchMore, jobs } = useJobsStore()
+    const navList = ['推荐', '实习', '校招', '留学生', '大招秋招', '问答', '活动']
+    const swiperList = [
+        { id: 1, image: swiper1 },
+        { id: 2, image: swiper2 },
+        { id: 3, image: swiper3 },
+        { id: 4, image: swiper4 },
+        { id: 5, image: swiper5 },
+        { id: 6, image: swiper6 },
+        { id: 7, image: swiper7 },
     ]
     return (
-        <div className={`flex flex-col flex-1`}>
-            <div className={`flex`}>
+        <div className={styles.Container}>
+            <div className={styles.Header}>
+                <div className={styles.HeaderSearch}>
+                    <div className={styles.HeaderSearchLeft}>
+                        <Icon type='icon-rili' size={30} />
+                    </div>
 
-                <Tabbar
-                    fixed={false}
-                    border={false}
-                    value={active}
-                    activeColor='black'
-                    onChange={(key) => {
-                        setActive(key);
-                    }}
+                    <div className={styles.HeaderSearchInput}>
+                        <Icon type='icon-sousuo' size={20} />
+                        <input type="text" placeholder='搜索职位/公司'
+                            onClick={() => {
+                                navigate('/search')
+                            }}
+                        />
+                    </div>
+                    <div className={styles.HeaderSearchRight}>
+                        <p>Web前端</p>
+                        <Arrow />
+                    </div>
+                </div>
+                <div className={styles.HeaderSwiper}>
+                    <Swiper autoplay={2500} className={styles.HeaderSwiperItem}>
+                        {
+                            swiperList.map((item) => (
+                                <Swiper.Item key={item.id}>
+                                    <img src={item.image} alt={`swiper-${item.id}`} />
+                                </Swiper.Item>
+                            ))
+                        }
+                    </Swiper>
+                </div>
+                <Tabs
+                    background=' linear-gradient(to bottom,#81ECEC49 0%, white 100%)'
+                    type='line'
+                    color='black'
+                    animated={true}
+                    swipeable={true}
                 >
-                    {tabs.map((tab, index) => (
-                        <Tabbar.Item
-                            key={index}
-                            icon={tab.icon}
-                            className={`${styles.tabbar} ${active === index ? styles.active : ''}`}
-                        >
-                            {tab.title}
-                        </Tabbar.Item>
-                    ))}
-                </Tabbar>
-
-                <Search shape='round' className={styles.search} onFocus={() => {
-                    navigate('/search')
-                }} />
-            </div>
-            <div>
-                <Tabbar
-                    fixed={false}
-                    border={false}
-
-                >
-                    {tabs2.map((tab, index) => (
-                        <Tabbar.Item
-                            key={index}
-                            icon={tab.icon}
-                        >
-                            {tab.title}
-                        </Tabbar.Item>
-                    ))}
-                </Tabbar>
-            </div>
-            <div className={`flex-1 flex-col flex`}>
-                <Tabs>
-                    {jobs.map((job, index) => (
-                        <Tabs.TabPane key={index} title={job.title} className={`flex-1 `}>
-                            <Jobs />
-                        </Tabs.TabPane>
-                    ))}
+                    {
+                        navList.map((item, index) => (
+                            <Tabs.TabPane key={index} title={item}>
+                                <JobsWaterfall jobs={jobs} fetchMore={fetchMore} />
+                            </Tabs.TabPane>
+                        ))
+                    }
                 </Tabs>
             </div>
-
         </div>
     )
 }
