@@ -1,0 +1,79 @@
+.HeaderSearch {
+    display: flex;
+    justify-content: space-around;
+    background: #81ECEC49;
+}
+
+.HeaderSearchLeft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    background: #dff0f0;
+    border-radius: 50%;
+
+}
+
+.HeaderSearchInput {
+    width: 60%;
+    display: flex;
+    height: 70px;
+    align-items: center;
+    justify-content: space-around;
+    background: white;
+    border-radius: 30px;
+}
+
+.HeaderSearchInputNotice {
+    width: 80%;
+    height: 100%;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.HeaderSearchRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NoticeBar 相關樣式 */
+.noticeSwiper {
+    height: 100%;
+}
+
+.noticeItem {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    padding: 0 15px;
+    font-size: 24px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 自定義 NoticeBar 樣式 */
+:global(.rv-notice-bar) {
+    background: transparent !important;
+    padding: 0 !important;
+    height: 100% !important;
+}
+
+:global(.rv-notice-bar__content) {
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+:global(.rv-notice-bar__content .rv-swiper) {
+    height: 100% !important;
+}
+
+:global(.rv-notice-bar__content .rv-swiper-item) {
+    display: flex;
+    align-items: center;
+    height: 100% !important;
+}

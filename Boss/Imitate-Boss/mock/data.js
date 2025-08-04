@@ -148,6 +148,104 @@ const getJobs = (page, pageSize = 10) => {
     }));
 };
 
+// 生成隨機圖片的函數
+const generateRandomImage = () => {
+    // 隨機背景顏色（確保文字清晰可見）
+    const bgColors = [
+        '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+        '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+        '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
+    ]
+    const bgColor = Mock.Random.pick(bgColors)
+
+    // 根據背景顏色選擇對比度高的文字顏色
+    const textColor = bgColor.startsWith('#FF') || bgColor.startsWith('#F7') || bgColor.startsWith('#F8') ? '#333' : '#FFF'
+
+    // 生成 SVG 圖片
+    const svg = `
+        <svg width="100" height="150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="150" fill="${bgColor}"/>
+            <text x="50" y="80" font-family="Arial, sans-serif" font-size="16" font-weight="bold" 
+                  text-anchor="middle" fill="${textColor}">hello</text>
+        </svg>
+    `
+
+    return `data:image/svg+xml;base64,${btoa(svg)}`
+}
+
+const getSquare = (page, pageSize = 10) => {
+    return Array.from({ length: pageSize }, (_, i) => {
+        // 隨機生成 1-3 張圖片
+        const imageCount = Mock.Random.integer(1, 3)
+        const images = Array.from({ length: imageCount }, () => generateRandomImage())
+
+        return {
+            id: `${page}+${i}`,
+            avator: 'https://resouces.modelscope.cn/cover-images/88aa6906-bc1e-4392-9311-a76aebd0307e.png?x-oss-process=image/format,jpg/quality,Q_50',
+            text: `${Mock.Random.pick([
+                '已上岸，我来分享一下经验：面试前充分准备，了解公司背景，预习常见问题，自信展现自我...',
+                '曾被拒十次，最终成功：失败不可怕，复盘每一次，找出短板并针对性提升...',
+                '国企上岸分享：带上简历和作品集，即使对方已有副本，主动提供显示诚意...',
+                '面经分享：清晰表达个人经历与成就，强调能为公司带来的价值，并从失败中学习...',
+                '面试技巧分享：积极倾听面试官提问，思考后再答，避免急于求成...',
+                '一线大厂面试分享：提问环节准备好问题，展示对职位及行业的深刻理解与兴趣...',
+                '面试心得：不怕提及过往失败经验，重点在于如何从中学习成长...',
+                '来分享一下面试经历：展现团队合作精神，讲述协作完成项目的成功案例，包括面对失败时的应对...',
+                '拿到Offer之后我们应该：跟进感谢邮件，简述面试收获，并再次表达加入意愿...',
+                '接受失败：保持乐观心态面对结果，无论成败，每次面试都是宝贵经验...',
+                '多次尝试终获成功：不要害怕失败，它教会了我更多比成功更重要的东西...',
+                '失败乃成功之母：总结失败中的教训，下一次就会做得更好...',
+                '从挫折中学到的：每一次失败后重新站起来，让自己变得更加强大...'
+            ])}`,
+            person: `${Mock.Random.cfirst()}${Mock.Random.pick(['女士', '先生'])}`,
+            images: images,
+            type: `${Mock.Random.pick(['面经', '经验分享', '面试技巧', '面试心得', '面试经历', '面试分享'])}`,
+            comments: Array.from({ length: Mock.Random.integer(1, 3) }, (_, commentIndex) => ({
+                id: `${page}+${i}+${commentIndex}`,
+                name: `${Mock.Random.cfirst()}${Mock.Random.pick(['女士', '先生'])}`,
+                text: Mock.Random.pick([
+                    '加油',
+                    '这是什么公司',
+                    '这是什么工作',
+                    '写的不错啊',
+                    '有没有内推啊',
+                    '你真的太棒了,真的要向你学习,现在的社会找工作... ',
+                    '求公司名字，我也想去！',
+                    '看完泪目了，最近投了50份简历没回音...',
+                    '太真实了，面试官问"你有什么缺点"我直接懵了...',
+                    '收藏了，等我上岸也来写面经',
+                    '感谢分享！已截图保存，准备明天面试用',
+                    '楼主运气好，我面到一半被HR打断说"下一个..."',
+                    '同是天涯打工人，抱抱你，也抱抱自己',
+                    '建议出个视频版，想听你讲讲当时的场景',
+                    '这才是干货！比那些营销号强一百倍',
+                    '有没有交流群？想认识更多找工作的小伙伴',
+                    '楼主太厉害了，我也要去试试',
+                    '这个公司怎么样？工作环境好吗？',
+                    '面试官问的问题好刁钻啊',
+                    '我也想去试试，有联系方式吗？',
+                    '楼主分享得很详细，学到了很多',
+                    '这个薪资待遇怎么样？',
+                    '面试流程大概多久？',
+                    '需要准备什么材料？',
+                    '有笔试吗？难度如何？',
+                    '公司文化怎么样？',
+                    '工作时间是双休吗？',
+                    '有年终奖吗？',
+                    '技术栈是什么？',
+                    '团队氛围怎么样？',
+                    '有培训机会吗？',
+                    '晋升空间大吗？',
+                    '工作压力大吗？',
+                    '有期权吗？',
+                    '公司发展前景如何？'
+                ]),
+            }))
+        }
+    })
+}
+
+// 首页招聘信息
 export default [
     {
         url: '/api/jobs',
@@ -161,6 +259,7 @@ export default [
             };
         },
     },
+    // 热门搜索建议
     {
         url: '/api/search',
         method: 'get',
@@ -205,6 +304,7 @@ export default [
             }
         }
     },
+    // 搜索建议
     {
         url: '/api/suggestSearch',
         method: 'get',
@@ -280,6 +380,7 @@ export default [
             }
         }
     },
+    // 登录
     {
         url: '/api/login',
         method: 'post',
@@ -310,6 +411,7 @@ export default [
             }
         }
     },
+    // 检测token
     {
         url: '/api/user',
         method: 'get',
@@ -328,6 +430,19 @@ export default [
                     message: 'Invalid Token'
                 }
             }
+        }
+    },
+    // 广场
+    {
+        url: '/api/square',
+        method: 'get',
+        timeout: 500,
+        response: ({ query }) => {
+            const page = Number(query.page) || 1;
+            return {
+                code: 0,
+                data: getSquare(page)
+            };
         }
     }
 ]

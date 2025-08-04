@@ -1,7 +1,8 @@
 import styles from './card.module.css'
 import {
     useRef,
-    useEffect
+    useEffect,
+    memo
 } from 'react'
 
 const ImageCard = (props) => {
@@ -27,4 +28,4 @@ const ImageCard = (props) => {
         <img ref={imgRef} data-src={url} className={styles.img} />
     )
 }
-export default ImageCard
+export default memo(ImageCard)
