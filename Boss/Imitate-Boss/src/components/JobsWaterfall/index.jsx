@@ -3,10 +3,12 @@ import {
     useEffect,
     useRef
 } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './JobsWaterfall.module.css'
 import ImageCard from '@/components/ImageCard'
 import { Loading } from 'react-vant'
 const JobsWaterfall = ({ jobs, fetchMore, isLoading }) => {
+    const navigate = useNavigate()
     useEffect(() => {
         // fetchMore()
         const observer = new IntersectionObserver(([entry]) => {
@@ -24,10 +26,14 @@ const JobsWaterfall = ({ jobs, fetchMore, isLoading }) => {
         <div className={styles.jobsContainer}>
             {
                 jobs.map(item => (
-                    <div key={item.id} className={styles.jobsItem}>
+                    <div key={item.id} className={styles.jobsItem}
+                        onClick={() => {
+                            navigate(`/detail/${item.id}`)
+                        }}
+                    >
                         <div className={styles.jobsItemBox}>
                             <div className={styles.jobsItemHeader}>
-                                <p>{item.title}</p>
+                                <p>{item.title.name}</p>
                                 <p
                                     style={{ color: '#029F9F' }}
                                 >{item.salary}</p>
