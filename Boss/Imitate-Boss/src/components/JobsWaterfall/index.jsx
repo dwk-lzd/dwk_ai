@@ -5,7 +5,8 @@ import {
 } from 'react'
 import styles from './JobsWaterfall.module.css'
 import ImageCard from '@/components/ImageCard'
-const JobsWaterfall = ({ jobs, fetchMore }) => {
+import { Loading } from 'react-vant'
+const JobsWaterfall = ({ jobs, fetchMore, isLoading }) => {
     useEffect(() => {
         // fetchMore()
         const observer = new IntersectionObserver(([entry]) => {
@@ -63,8 +64,8 @@ const JobsWaterfall = ({ jobs, fetchMore }) => {
                     </div>
                 ))
             }
-            <div ref={divBottom}>
-
+            <div ref={divBottom} className={styles.loading}>
+                {isLoading ? <Loading type='ball' /> : null}
             </div>
         </div>
     )

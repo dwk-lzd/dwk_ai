@@ -10,7 +10,8 @@ import {
     CommentO,
 } from '@react-vant/icons'
 import ImageCard from '@/components/ImageCard'
-const ArticleWaterfall = ({ articles, fetchArticle }) => {
+import { Loading } from 'react-vant'
+const ArticleWaterfall = ({ articles, fetchArticle, isLoading }) => {
     const bottomRef = useRef(null)
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -66,8 +67,8 @@ const ArticleWaterfall = ({ articles, fetchArticle }) => {
                     </div>
                 ))
             }
-            <div ref={bottomRef}>
-
+            <div ref={bottomRef} className={styles.loading}>
+                {isLoading ? <Loading type='ball' /> : null}
             </div>
         </div>
     )

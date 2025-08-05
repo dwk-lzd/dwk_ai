@@ -64,3 +64,11 @@
 .jobsItemFooterCompany div {
     margin-left: 15px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin-top: 15px;
+}
