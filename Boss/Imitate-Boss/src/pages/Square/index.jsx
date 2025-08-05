@@ -1,18 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Square.module.css'
 import Icon from '@/components/Icon/Icon'
 import { useNavigate } from 'react-router-dom'
-import { NoticeBar, Swiper, Tabs, Skeleton } from 'react-vant'
+import { NoticeBar, Swiper, Tabs, Skeleton, Badge } from 'react-vant'
 import {
     CommentO
 } from '@react-vant/icons'
 import ArticleWaterfall from '@/components/ArticleWaterfall'
 import { useArticleStore } from '@/store/useArticleStore'
-
-
+import Toast from '@/components/Toast'
+import LikeArticle from '@/components/LikeArticle'
+import { clearToast } from '@/components/Toast/ToastController'
 const Square = () => {
     const navigate = useNavigate()
-    const navList = ['推荐', '关注', '同行说']
+    const navList = ['推荐', '同行说', '喜欢']
     // 通知內容數據
     const noticeData = [
         '我的面试经历',
@@ -20,6 +21,9 @@ const Square = () => {
         '计算机专业人均工资',
     ]
     const { articles, fetchArticle, isLoading, initialLoading } = useArticleStore()
+
+    // 修復 Tabs 高度問題 - 只針對喜歡列表頁面
+
     useEffect(() => {
         fetchArticle()
     }, [])
@@ -107,30 +111,8 @@ const Square = () => {
                             }}
                         >
                             <Icon type='icon-sousuo' size={20} />
-                            <div className={styles.HeaderSearchInputNotice}>
-                                <NoticeBar
-                                    background='transparent'
-                                    color='#666'
-                                    // scrollable
-                                    speed={50}
-                                    delay={2}
-                                >
-                                    <Swiper
-                                        autoplay={2000}
-                                        indicator={false}
-                                        vertical
-                                        className={styles.noticeSwiper}
-                                        loop
-                                    >
-                                        {noticeData.map((item, index) => (
-                                            <Swiper.Item key={index}>
-                                                <div className={styles.noticeItem}>
-                                                    {item}
-                                                </div>
-                                            </Swiper.Item>
-                                        ))}
-                                    </Swiper>
-                                </NoticeBar>
+                            <div className={styles.HeaderSearchInputText}>
+                                搜索文章、话题或用户
                             </div>
                         </div>
 
@@ -145,14 +127,28 @@ const Square = () => {
                         animated={true}
                         swipeable={true}
                         align='start'
+                        className={styles.tabs}
                     >
                         {navList.map((item, index) => (
-                            <Tabs.TabPane key={index} title={item}
+                            <Tabs.TabPane key={index} title={
+                                index === 2 ? (
+                                    <div className={styles.tabWithBadge} onClick={() => {
+                                        clearToast()
+                                    }}>
+                                        <div className={styles.badgeContainer} style={{ fontSize: '16px' }}>{item}
+                                            <Toast />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <span style={{ fontSize: '16px' }}>{item}</span>
+                                )
+                            }
                             >
-                                <ArticleWaterfall articles={articles} fetchArticle={fetchArticle} isLoading={isLoading} />
+                                {index === 2 ? (<LikeArticle />) : (<ArticleWaterfall articles={articles} fetchArticle={fetchArticle} isLoading={isLoading} />)}
                             </Tabs.TabPane>
                         ))}
                     </Tabs>
+
                 </div>
             )}
         </>

@@ -5,14 +5,26 @@ import {
 } from 'react'
 import styles from './ArticleWaterfall.module.css'
 import {
-    GoodJobO,
+    LikeO,
     ShareO,
     CommentO,
 } from '@react-vant/icons'
 import ImageCard from '@/components/ImageCard'
 import { Loading } from 'react-vant'
+import { showToast, decreaseToast } from '@/components/Toast/ToastController'
+import { useLikeStore } from '@/store/useLikeStore'
 const ArticleWaterfall = ({ articles, fetchArticle, isLoading }) => {
     const bottomRef = useRef(null)
+    const { toggleLike, isLiked } = useLikeStore()
+
+    const handleLike = (article) => {
+        const isNowLiked = toggleLike(article)
+        if (isNowLiked) {
+            showToast() // 點讚時加一
+        } else {
+            decreaseToast() // 取消點讚時減一
+        }
+    }
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
@@ -59,7 +71,14 @@ const ArticleWaterfall = ({ articles, fetchArticle, isLoading }) => {
 
                             </div>
                             <div className={styles.articleFooter}>
-                                <GoodJobO fontSize={20} />
+                                <LikeO
+                                    fontSize={20}
+                                    onClick={() => handleLike(item)}
+                                    style={{
+                                        color: isLiked(item.id) ? '#ff4757' : '#666',
+                                        cursor: 'pointer'
+                                    }}
+                                />
                                 <CommentO fontSize={20} />
                                 <ShareO fontSize={20} />
                             </div>

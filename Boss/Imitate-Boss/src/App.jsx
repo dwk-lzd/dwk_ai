@@ -21,6 +21,7 @@ const Acount = lazy(() => import('./pages/Acount/index.jsx'))
 const Search = lazy(() => import('./pages/Search/index.jsx'))
 const Login = lazy(() => import('./pages/Login/index.jsx'))
 const RequireAuth = lazy(() => import('./components/RequireAuth/index.jsx'))
+const Detail = lazy(() => import('./pages/Detail/index.jsx'))
 function App() {
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/' element={<Blanklayout />}>
             <Route path='/search' element={<Search />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/detail/:id' element={<Detail />} />
           </Route>
         </Routes>
       </Suspense>

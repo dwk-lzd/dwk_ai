@@ -38,42 +38,24 @@
     justify-content: center;
 }
 
-/* NoticeBar 相關樣式 */
-.noticeSwiper {
+/* 搜索框文字樣式 */
+.HeaderSearchInputText {
+    width: 80%;
     height: 100%;
-}
-
-.noticeItem {
     display: flex;
     align-items: center;
-    height: 70px;
-    padding: 0 15px;
-    font-size: 24px;
-    color: #666;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    justify-content: center;
+    font-size: 28px;
+    color: #999;
+    background: transparent;
 }
 
-/* 自定義 NoticeBar 樣式 */
-:global(.rv-notice-bar) {
-    background: transparent !important;
-    padding: 0 !important;
-    height: 100% !important;
+.badgeContainer {
+    position: relative;
+    padding: 20px;
 }
 
-:global(.rv-notice-bar__content) {
-    height: 100% !important;
-    display: flex;
-    align-items: center;
-}
-
-:global(.rv-notice-bar__content .rv-swiper) {
-    height: 100% !important;
-}
-
-:global(.rv-notice-bar__content .rv-swiper-item) {
-    display: flex;
-    align-items: center;
-    height: 100% !important;
-}
+/* 控制 Tabs 內容高度 .tabs :global(.rv-tabs__content) {
+    min-height: auto !important;
+    height: auto !important;
+} */
