@@ -14,8 +14,11 @@ import { chat } from '@/llm/index.js'
 import styles from './AiConversation.module.css'
 import { ChatO, UserO } from '@react-vant/icons';
 import Icon from "@/components/Icon/Icon"
-
+import useTitle from '@/hooks/useTitle';
 const AiConversation = () => {
+    useEffect(() => {
+        useTitle('bubu智聘AI智能招聘助手')
+    }, [])
     const [text, setText] = useState("");
     const [isSending, setIsSending] = useState(false);
     // 数据驱动界面

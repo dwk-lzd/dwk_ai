@@ -17,7 +17,7 @@ import JobsWaterfall from '@/components/JobsWaterfall/index.jsx'
 import {
     useJobsStore
 } from '@/store/useJobsStore'
-
+import useTitle from '@/hooks/useTitle';
 
 import swiper1 from '@/assets/swiper/swiper1.png'
 import swiper2 from '@/assets/swiper/swiper2.png'
@@ -41,6 +41,7 @@ const Home = () => {
     ]
     useEffect(() => {
         fetchMore()
+        useTitle('bubu智聘首页')
     }, [])
     return (
         <div className={styles.Container}>

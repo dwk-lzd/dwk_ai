@@ -11,6 +11,8 @@ import { useArticleStore } from '@/store/useArticleStore'
 import Toast from '@/components/Toast'
 import LikeArticle from '@/components/LikeArticle'
 import { clearToast } from '@/components/Toast/ToastController'
+import useTitle from '@/hooks/useTitle';
+
 const Square = () => {
     const navigate = useNavigate()
     const navList = ['推荐', '同行说', '喜欢']
@@ -26,6 +28,7 @@ const Square = () => {
 
     useEffect(() => {
         fetchArticle()
+        useTitle('bubu智聘广场页')
     }, [])
 
     return (

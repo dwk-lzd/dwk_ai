@@ -39,7 +39,7 @@ export const chat = async (
     }
 }
 
-export const kimitChat = async (message) => {
+export const AnytChat = async (message) => {
     const res = await chat(
         message,
         KIMI_CHAT_API_URL,

@@ -22,8 +22,13 @@ import {
 import Icon from '@/components/Icon/Icon'
 import schoolLogo from '@/assets/school.png'
 import { useUserStore } from '@/store/useUserStore'
+import useTitle from '@/hooks/useTitle';
 
 const Acount = () => {
+    useEffect(() => {
+        useTitle('bubu智聘账号中心')
+    }, [])
+
     const { user, getUserInfo } = useUserStore()
     const navigate = useNavigate()
     const handleLogout = () => {

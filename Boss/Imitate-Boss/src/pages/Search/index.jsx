@@ -23,7 +23,7 @@ import {
 import {
     useSuggestStore
 } from '@/store/useSuggestStore'
-
+import useTitle from '@/hooks/useTitle';
 const Search = () => {
     // 热门搜索
     const { hotlist, setHotlist } = useHotlistStore()
@@ -35,6 +35,7 @@ const Search = () => {
     // 初始化時清空搜索建議
     useEffect(() => {
         clearSuggestList()
+        useTitle('bubu智聘搜索页')
     }, [])
 
     const handleBack = () => {

@@ -9,12 +9,15 @@ import { ArrowLeft, ShareO, StarO, WarnO, LocationO, PointGiftO, ShieldO, Play, 
 import {
     Divider
 } from 'react-vant'
+import useTitle from '@/hooks/useTitle';
 const Detail = () => {
     const { id } = useParams()
     const { jobs } = useJobsStore()
     const job = jobs.find(job => job.id === id)
     console.log(job)
     useEffect(() => {
+        useTitle(`${job.company.name}-${job.title.name} - 职位详情`)
+
         // 保存原始背景色
         const originalBg = document.body.style.backgroundColor || '#0700000f';
 

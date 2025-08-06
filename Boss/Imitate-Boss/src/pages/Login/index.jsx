@@ -1,6 +1,7 @@
 import {
     useState,
-    useRef
+    useRef,
+    useEffect,
 } from 'react'
 import {
     Divider,
@@ -19,7 +20,12 @@ import {
 import {
     useNavigate
 } from 'react-router-dom'
+import useTitle from '@/hooks/useTitle';
 const Login = () => {
+    useEffect(() => {
+        useTitle('bubu智聘登录页')
+    }, [])
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const usernameRef = useRef('')
