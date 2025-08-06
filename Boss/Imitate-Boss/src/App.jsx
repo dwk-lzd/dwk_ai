@@ -22,6 +22,7 @@ const Search = lazy(() => import('./pages/Search/index.jsx'))
 const Login = lazy(() => import('./pages/Login/index.jsx'))
 const RequireAuth = lazy(() => import('./components/RequireAuth/index.jsx'))
 const Detail = lazy(() => import('./pages/Detail/index.jsx'))
+const Coze = lazy(() => import('./pages/Coze/index.jsx'))
 function App() {
 
 
@@ -42,6 +43,7 @@ function App() {
             <Route path='/search' element={<Search />} />
             <Route path='/login' element={<Login />} />
             <Route path='/detail/:id' element={<Detail />} />
+            <Route path='/coze' element={<Coze />} />
           </Route>
         </Routes>
       </Suspense>

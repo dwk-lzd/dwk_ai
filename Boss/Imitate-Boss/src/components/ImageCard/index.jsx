@@ -4,9 +4,13 @@ import {
     useEffect,
     memo
 } from 'react'
+import {
+    useNavigate
+} from 'react-router-dom'
 
-const ImageCard = (props) => {
-    const { url, height } = props
+const ImageCard = ({ url }) => {
+    const navigate = useNavigate()
+    // const { url, height } = props
     const imgRef = useRef(null)
     useEffect(() => {
         const observer = new IntersectionObserver(([entry], obs) => {

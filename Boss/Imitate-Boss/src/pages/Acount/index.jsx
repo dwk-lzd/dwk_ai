@@ -47,7 +47,7 @@ const Acount = () => {
         { icon: <Column fontSize={30} color='#81ececc0' />, title: '在线简历' },
         { icon: <Invitation fontSize={30} color='#81ececc0' />, title: '附件简历' },
         { icon: <Like fontSize={30} color='#81ececc0' />, title: '求职意向' },
-        { icon: <Star fontSize={30} color='#81ececc0' />, title: '简历优化' },
+        { icon: <Star fontSize={30} color='#81ececc0' onClick={() => navigate('/coze')} />, title: '简历优化' },
     ])
     const [otherFunctionList, setOtherFunctionList] = useState([
         { icon: <Icon type='icon-boshimao1' size={25} />, title: '实习专区' },
@@ -161,12 +161,20 @@ const Acount = () => {
                 <div className={styles.usualFunctionList}>
                     {
                         usualFunctionList.map((item, index) => (
-                            <div key={index} className={styles.usualFunctionItem}>
+                            index === 3 ? (
+                                <div key={index} className={styles.usualFunctionItem} onClick={() => navigate('/coze')}>
+
+                                    <div className={styles.usualFunctionIcon}>
+                                        {item.icon}
+                                    </div>
+                                    <div className={styles.usualFunctionText}>{item.title}</div>
+                                </div>
+                            ) : (<div key={index} className={styles.usualFunctionItem}>
                                 <div className={styles.usualFunctionIcon}>
                                     {item.icon}
                                 </div>
                                 <div className={styles.usualFunctionText}>{item.title}</div>
-                            </div>
+                            </div>)
                         ))
                     }
                 </div>

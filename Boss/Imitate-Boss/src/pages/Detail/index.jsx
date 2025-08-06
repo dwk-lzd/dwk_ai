@@ -9,11 +9,13 @@ import { ArrowLeft, ShareO, StarO, WarnO, LocationO, PointGiftO, ShieldO, Play, 
 import {
     Divider
 } from 'react-vant'
+import { useNavigate } from 'react-router-dom';
 import useTitle from '@/hooks/useTitle';
 const Detail = () => {
     const { id } = useParams()
     const { jobs } = useJobsStore()
     const job = jobs.find(job => job.id === id)
+    const navigate = useNavigate()
     console.log(job)
     useEffect(() => {
         useTitle(`${job.company.name}-${job.title.name} - 职位详情`)
@@ -116,7 +118,8 @@ const Detail = () => {
                     </div>
                     <div className={styles.detailBodyFooter}>
                         <div className={styles.detailBodyFooterAI}>
-                            <ImageCard url={AIPNG} />
+                            <img src={AIPNG} alt="" onClick={() => navigate('/coze')} />
+
                         </div>
                     </div>
                     <Divider className={styles.myDivider} />
@@ -124,7 +127,10 @@ const Detail = () => {
                         <h2>公司信息</h2>
                         <div className={styles.detailBodyFooterBottomMsg}>
                             <div className={styles.detailBodyFooterBottomMsgLeft}>
+
                                 <ImageCard url={job.company.logo} />
+
+
                                 <div>
                                     <h3>{job.company.name}</h3>
                                     <div>
