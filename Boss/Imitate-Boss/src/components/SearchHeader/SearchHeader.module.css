@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    background: #81ecec49;
+    background: white;
 }
 
 .searchButton span {

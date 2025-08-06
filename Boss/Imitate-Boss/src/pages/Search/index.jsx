@@ -61,7 +61,9 @@ const Search = () => {
         addHistory(value)
         setValue('')
         clearSuggestList() // 搜索後清空建議
-        searchRef.current.focus()
+        setTimeout(() => {
+            searchRef.current?.focus()
+        }, 0)
     }
 
     return (
@@ -73,6 +75,7 @@ const Search = () => {
                 onBack={handleBack}
                 placeholder="请输入职位名称"
                 handleValue={handleValue}
+                searchRef={searchRef}
             />
             {
                 value.trim() === '' ? (

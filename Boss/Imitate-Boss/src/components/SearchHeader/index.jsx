@@ -22,6 +22,7 @@ const SearchHeader = ({
     onBack,
     placeholder = '请输入职位名称',
     handleValue,
+    searchRef
 }) => {
     const handleValueDebounce = useMemo(() => {
         return debounce(handleValue, 700)
@@ -55,8 +56,8 @@ const SearchHeader = ({
             <SearchVant
                 value={value}
                 label='搜索'
+                ref={searchRef}
                 shape='round'
-                background='#81ecec0f'
                 placeholder={placeholder}
                 className={`flex-1`}
                 onChange={(value) => {

@@ -30,7 +30,7 @@ const HistorySearch = ({ historyList }) => {
                         return (
                             <div key={item.id} className={`${styles.historyItem}`}>
                                 <div className={`${styles.historyItemClock}`}>
-                                    <ClockO fontSize={16} color='blue' />
+                                    <ClockO fontSize={16} color='#999' />
                                 </div>
                                 <div>
                                     {item.text}
@@ -44,7 +44,7 @@ const HistorySearch = ({ historyList }) => {
                                         localStorage.setItem('searchHistory', JSON.stringify(updatedHistory))
                                     }}
                                 >
-                                    <Close fontSize={16} color='red' />
+                                    <Close fontSize={16} color='#999' />
                                 </div>
                             </div>
                         )
