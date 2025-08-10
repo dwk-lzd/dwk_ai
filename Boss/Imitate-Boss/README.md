@@ -182,7 +182,10 @@
     es6 特性使用
     tabbar 高亮
     arr.findIndex + str.startsWith
-    
+- coze 工作流返回的数据是嵌套的JSON字符串，需要扁平化处理，
+    需要扁平化处理，
+    导致一直没有渲染，
+    之后成功发现解决了这个问题
 ## 项目迭代
     - 功能由潜入深
     - chatbot  deepseek 简单chat
