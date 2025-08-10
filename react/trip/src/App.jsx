@@ -19,6 +19,8 @@ const Trip = lazy(() => import('@/pages/Trip'))
 const Acount = lazy(() => import('@/pages/Acount'))
 const Detail = lazy(() => import('@/pages/Detail'))
 const Coze = lazy(() => import('./pages/Coze/index.jsx'));
+const Article = lazy(() => import('./pages/Article/index.jsx'))
+const ArticleNew = lazy(() => import('./pages/Article/ArticleNew/index.jsx'))
 import './App.css'
 
 function App() {
@@ -44,6 +46,9 @@ function App() {
             <Route path='/search' element={<Search />} />
             <Route path='/detail/:id' element={<Detail />} />
             <Route path="/coze" element={<Coze />} />
+            <Route path='/article' element={<Article />} >
+              <Route path='new' element={<ArticleNew />} />
+            </Route>
           </Route>
         </Routes>
 
