@@ -31,8 +31,39 @@ function App() {
       type: 'module'
     })
 
-    const onMessageReceived = () => {
-
+    const onMessageReceived = (e) => {
+      console.log(e, '来自主线程');
+      switch (e.data.status) {
+        case 'initiate':
+          // llm ready 了吗
+          setReady(false)
+          setProgressItems(prev => [...prev, e.data])
+          break;
+        // case 'download':
+        //   break;
+        case 'progress':
+          // console.log(e.data)
+          setProgressItems(
+            prev => prev.map(item => {
+              if (item.file === e.data.file) {
+                return {
+                  ...item,
+                  progress: e.data.progress
+                }
+              }
+              return item
+            })
+          )
+          break;
+        case 'done':
+          setProgressItems(
+            prev => prev.filter(item => item.file !== e.data.file)
+          )
+          break;
+        case 'ready':
+          setReady(true)
+          break;
+      }
     }
     worker.current.onmessage = onMessageReceived;
 
@@ -48,8 +79,43 @@ function App() {
       speaker_id: selectedSperaker
     })
   }
+
+  const isLoading = ready === false
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      {/* llm 初始化 */}
+      <div
+        className='absolute z-50 top-0 left-0 w-full h-full transition-all px-8 flex flex-col justify-center text-center'
+        style={{
+          opacity: isLoading ? 1 : 0,
+          pointerEvents: isLoading ? 'all' : 'none',
+          background: 'rgba(0,0,0,0.9)',
+          backdropFilter: 'blur(8px)'
+        }}
+      >
+        {
+          isLoading && (
+            <label
+              className='text-white text-xl p-3'
+            >
+              Loading models... (only run once)
+            </label>
+          )
+        }
+        {
+          progressItems.map(data => (
+            <div
+              key={`${data.name}/${data.file}`}
+            >
+              <Progess
+                text={`${data.name}/${data.file}`}
+                percentage={data.progress}
+              />
+            </div>
+          ))
+        }
+      </div>
+      {/* tts功能区 */}
       <div className='bg-white p-8 rounded-lg  w-full max-w-xl m-2'>
         <h1 className="text-3xl font-semibold text-gray-800 mb-1 text-center  ">
           In briwser Text To Speech(端模型)
