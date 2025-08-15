@@ -41,4 +41,5 @@
 
 - 场景
     - 回退
-    git restore --staged algorithm/readme.md   从暂存区回退
+    git restore --staged algorithm/readme.md   从暂存区回退到工作区
+    git restore algorithm/readme.md  从本地仓库回退到工作区
