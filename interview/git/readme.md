@@ -28,7 +28,8 @@
     git add . 提交到暂存区
     git commit -m '' 提交到仓库
     git push origin main  提交搭配远程仓库
-    git merge xxx 把分支合并到主分支
+    git merge 分支名/分支文件内容 把分支合并到主分支
+
 
 
 - 场景
