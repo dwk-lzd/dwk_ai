@@ -11,6 +11,16 @@
     mcp
 - ai 搜索
 
+## 双token
+    单token localStorage 长期， 第三方拦截， 不安全
+    安全 + 无感刷新登录
+    双token
+    - accessToken 校验身份  重要  时间有效期变短  以小时为单位
+        过期怎么办
+    - refreshToken 刷新 7天 时间长
+        没有过期，refreshToken 发到服务器  /api/auth/refresh 
+        返回新的accessToken 无感刷新
+    - refreshToken 过期后， 去登录页重新登录
 ## 开发流程
 - .env
     mysql url
@@ -76,3 +86,43 @@ bcryptjs 是一个纯 JavaScript 实现的密码哈希库，用于安全地加�
     - 400 Bad Request
     - 409 Conflict  冲突
     - 500 Internal Server Error
+
+- middleware 的概念
+    中间件  配置一个白名单
+    /dashboard
+    Middleware 是中间件，用于在请求和响应之间执行预处理逻辑，如日志、认证、数据解析等。
+    - 配置一个需要登录的页面数组
+    - some startWith  判断是否在白名单中
+    - NextResponse.next()  放行
+    - NextResponse.redirect(new URL('/login', request.url))  重定向到登录页
+
+    - 通过jwt verify 方法拿到payload后，添加了自定义请求头
+        x-user-id
+        后续页面就可以拿到这个值
+
+- JWT的构成
+    - 头部
+        签名算法 HS256
+    - 载荷
+        {userId:...}
+    - 签名
+        secretKey
+
+- cookie
+    httpOnly:true
+    HttpOnly 可防止 JavaScript 访问 Cookie，有效抵御 XSS 攻击导致的令牌泄露。
+    服务器端设置
+    SameSite 可防止跨站请求伪造（CSRF）攻击，限制 Cookie 在跨域请求中的自动发送，提升安全性。
+- 后端安全和性能
+    - 一定要做容错处理
+        try catch finally
+    - 释放数据库对象
+        await prisma.$disconnect()
+    
+- prisma client 的CRUD方法
+    prisma.user.create()
+    prisma.user.findUnique()
+    prisma.user.updata({
+        where:{},
+        data:{}
+    })
