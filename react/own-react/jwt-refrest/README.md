@@ -28,7 +28,7 @@
 - prisima 初始化 
     安装 pnpm i prisma @prisma/client
     npx prisma init 初始化
-
+    npx prisma migrate dev --name init 初始化数据库表结构
     orm 工具
     object relation mapping
     User(表) => User(类)
@@ -147,3 +147,29 @@ bcryptjs 是一个纯 JavaScript 实现的密码哈希库，用于安全地加�
     HashWorkerIn
     HashWorkerOut
     as 断言
+    非空断言 file!.size
+
+- useRef的高级使用场景
+    可变对象
+    - DOM对象
+    - 对象
+    - 保存值
+    AbortController 取消请求对象，推迟到上传在实例化
+    暂停的值也用 ref 保存
+
+- es6 特性
+    - Set 存储已经上传的分片索引
+    - ?? 空值合并运算符
+    - promise.all  并发
+    - Map 和 Set
+
+- restful api
+    - uploadChunk  PUT /api/upload/chunk
+    - 自定义请求头
+    这里的 headers 通过自定义请求头传递元数据（文件哈希、分片序号），
+    使服务端能在不解析请求体的情况下快速识别分片归属和顺序，提升处理效率和可扩展性。
+    解析请求头就可以判断是否已上传的chunk 更快，避免重复操作
+## 项目的难点
+- 分片上传的并发控制
+    promise.all + 递归
+    并发限流的核心是：一开始只启动不超过 MAX_CONCURRENCY 个工人函数，每个工人执行完一个任务后会递归调用 next()，继续从队列取下一个任务，从而保证始终只有固定数量的工人在运行。这样既避免了同时创建过多 Promise 占用资源，又能充分利用并行度；等所有工人都把队列清空才 resolve，Promise.all 就能精确等待整个批次完成。

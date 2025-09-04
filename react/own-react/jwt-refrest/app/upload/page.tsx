@@ -10,16 +10,29 @@ import {
     HashWorkerIn,
     HashWorkerOut
 } from '../hash.worker';
+import { findSourceMap } from 'module';
 
 
 const CHUNK_SIZE = 5 * 1024 * 1024 // 5MB 一片
 const MAX_CONCURRENCY = 4 // 最大并发数
+
+type InitResp = {
+    complete: boolean;
+    uploaded: number[]; // 已上传的分片
+
+}
+
 const Upload = () => {
     const [hash, setHash] = useState<string>('')
     const [file, setFile] = useState<File | null>(null)
     const [status, setStatus] = useState<string>('')
     const totalChunks = useMemo(() => file ? Math.ceil(file.size / CHUNK_SIZE) : 0, [file])
+    // 可变对象
     const workerRef = useRef<Worker | null>(null)
+    const abortRef = useRef<AbortController | null>(null)
+    // 缓存值
+    const pausedRef = useRef<boolean>(false)
+    const [progress, setProgress] = useState<number>(0)
     useEffect(() => {
         const worker = new Worker(new URL('../hash.worker.ts', import.meta.url))
         workerRef.current = worker
@@ -55,6 +68,115 @@ const Upload = () => {
             handleFile(f)
         }
     }
+
+    const initUpload = async (): Promise<InitResp> => {
+        const res = await fetch('/api/upload/init', {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                fileHash: hash,
+                // ! 是 TypeScript 的非空断言操作符，用于告诉编译器
+                // “我确定这个值不是 null 或 undefined”，从而安全地访问其属性或方法。
+                fileName: file!.name,
+                fileSize: file!.size,
+                chunkSize: CHUNK_SIZE, // 分片大小
+                totalChunks  // 分片总数
+            })
+        })
+        return res.json() as Promise<InitResp>
+    }
+
+
+    const pause = () => {
+        pausedRef.current = true
+        abortRef.current?.abort()
+    }
+
+    const resume = async () => {
+        if (!file || !hash) return
+        setStatus('继续上传....')
+        await startUpload()
+    }
+    const uploadChunk = async (index: number, signal: AbortSignal) => {
+        const start = index * CHUNK_SIZE
+        const end = Math.min(file!.size, start + CHUNK_SIZE)
+        const blob = file!.slice(start, end)
+
+        const res = await fetch('/api/upload/chunk', {
+            method: 'PUT',
+            headers: {
+                "x-file-hash": hash,
+                "x-chunk-index": String(index),
+            },
+            body: blob,
+            signal,
+        })
+
+        if (!res.ok) throw new Error(`分片${index}上传失败`);
+        return res.json()
+
+    }
+    const startUpload = async () => {
+        if (!file) {
+            return
+        }
+
+        setStatus('初始化上传....')
+        abortRef.current = new AbortController()
+        pausedRef.current = false
+
+        const init = await initUpload()
+        // const init = {
+        //     complete: false,
+        //     uploaded: []
+        // }
+        if (init.complete) {
+            setProgress(100)
+            setStatus('妙传完成')
+            return
+        }
+
+        // 不可重复的切片index 存储
+        // ?? 是空值合并操作符 
+        const uploaded = new Set<number>(init.uploaded ?? []) // ??表示如果init.uploaded为空，就用[]代替
+        // let done = uploaded.size  // set 的 size 就是已上传的分片数量
+        let done = 20
+        setProgress(Math.floor((done / totalChunks) * 100))
+
+        // 并发限流  队列
+        const queue: number[] = []
+        for (let i = 0; i < totalChunks; i++) {
+            if (!uploaded.has(i)) {
+                queue.push(i)
+            }
+        }
+
+        // upload worker
+        const workers: Promise<void>[] = []
+        const next = async () => {
+            if (pausedRef.current) return; // 暂停
+            const idx = queue.shift()
+            if (idx === undefined) return;
+            try {
+                await uploadChunk(idx, abortRef.current!.signal)
+                done++
+                setProgress(Math.floor((done / totalChunks) * 100))
+            } finally {
+                if (queue.length) await next()
+            }
+        }
+        for (let c = 0; c < Math.min(MAX_CONCURRENCY, queue.length); c++) {
+            workers.push(next())
+        }
+        setStatus('分布上传中....')
+        try {
+            await Promise.all(workers)
+        } catch (err) {
+
+        }
+    }
     return (
         <main className="min-h-screen bg-gray-50 p-8">
             <div className="mx-auto max-w-2xl space-y-6">
@@ -73,11 +195,36 @@ const Upload = () => {
                             <div>
                                 文件：{file.name} ({(file.size / (1024 * 1024)).toFixed(2)}MB)
                             </div>
-                            {/* <div className='text-sm text-gray-700'>
+                            <div className='text-sm text-gray-700'>
                                 分片大小：{CHUNK_SIZE / (1024 * 1024)}MB
-                            </div> */}
+                                分片总数：{totalChunks}
+                            </div>
+                            <div className="h-3 w-full overflow-hidden rounded bg-gray-200">
+                                <div className='h-3 bg-black' style={{ width: `${progress}%` }}></div>
+                            </div>
                             <div className='mt-2 text-sm text-gray-600'>
                                 {status}
+                            </div>
+                            <div className='mt-4 flex gap-2'>
+                                <button
+                                    className='rounded-xl bg-black px-4 py-2 text-white disabled:opacity-50'
+                                    disabled={!file}
+                                    onClick={startUpload}
+                                >
+                                    开始上传
+                                </button>
+                                <button
+                                    className='rounded-xl border px-4 py-2'
+                                    onClick={pause}
+                                >
+                                    暂停
+                                </button>
+                                <button
+                                    className='rounded-xl border px-4 py-2'
+                                    onClick={resume}
+                                >
+                                    继续
+                                </button>
                             </div>
                         </div>
                     )
