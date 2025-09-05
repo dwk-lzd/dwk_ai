@@ -72,7 +72,7 @@ export function writeMeta(fileHash: string, meta: Meta) {
     writeFileSync(metaPath(fileHash), JSON.stringify(meta, null, 2))
 }
 
-export function listUploadedChunks(fileHash: string) {
+export function listUploadedChunks(fileHash: string) {  // 用来获取已上传的分片索引数组
     const { chunkDir } = getUploadDir(fileHash)
     if (!existsSync(chunkDir)) return []
     const files = readdirSync(chunkDir)
@@ -96,4 +96,25 @@ export function fileAlreadyExist(fileHash: string, fileName: string) {
     const p = finalFilePath(fileHash, fileName)
     return existsSync(p) && statSync(p).size > 0
 
+}
+
+export function mergeChunks(fileHash: string, fileName: string, totalChunks: number) {
+    const {
+        chunkDir
+    } = getUploadDir(fileHash)
+
+    const target = finalFilePath(fileHash, fileName)
+    const ws = createWriteStream(target)
+    for (let i = 0; i < totalChunks; i++) {
+        const p = join(chunkDir, `${i}.part`)
+        if (!existsSync(p)) throw new Error(`分片${i}不存在`);
+        const data = readFileSync(p)
+        ws.write(data)
+
+    }
+    ws.end()
+    return new Promise((resolve, reject) => {
+        ws.on('finish', () => resolve(target))
+        ws.on('error', reject)
+    })
 }
